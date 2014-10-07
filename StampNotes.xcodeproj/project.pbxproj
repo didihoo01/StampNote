@@ -1,0 +1,464 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1734F4C919E3561000639716 /* RecordingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1734F4C819E3561000639716 /* RecordingListTableViewController.m */; };
+		1734F4CC19E3600300639716 /* RecordingScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1734F4CB19E3600300639716 /* RecordingScreenViewController.m */; };
+		1764E73819E33D43004323F4 /* Recording.m in Sources */ = {isa = PBXBuildFile; fileRef = 1764E73719E33D43004323F4 /* Recording.m */; };
+		17C5F4E519E0B01000559E97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E419E0B01000559E97 /* main.m */; };
+		17C5F4E819E0B01000559E97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E719E0B01000559E97 /* AppDelegate.m */; };
+		17C5F4EB19E0B01000559E97 /* StampNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E919E0B01000559E97 /* StampNotes.xcdatamodeld */; };
+		17C5F4F119E0B01000559E97 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17C5F4EF19E0B01000559E97 /* Main.storyboard */; };
+		17C5F4F319E0B01000559E97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17C5F4F219E0B01000559E97 /* Images.xcassets */; };
+		17C5F4F619E0B01000559E97 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17C5F4F419E0B01000559E97 /* LaunchScreen.xib */; };
+		17C5F50219E0B01000559E97 /* StampNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F50119E0B01000559E97 /* StampNotesTests.m */; };
+		17C5F51319E224ED00559E97 /* SNMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F51219E224ED00559E97 /* SNMainTableViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		17C5F4FC19E0B01000559E97 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 17C5F4D719E0B01000559E97 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 17C5F4DE19E0B01000559E97;
+			remoteInfo = StampNotes;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1734F4C719E3561000639716 /* RecordingListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordingListTableViewController.h; sourceTree = "<group>"; };
+		1734F4C819E3561000639716 /* RecordingListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordingListTableViewController.m; sourceTree = "<group>"; };
+		1734F4CA19E3600300639716 /* RecordingScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordingScreenViewController.h; sourceTree = "<group>"; };
+		1734F4CB19E3600300639716 /* RecordingScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordingScreenViewController.m; sourceTree = "<group>"; };
+		1764E73619E33D43004323F4 /* Recording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Recording.h; path = ../Recording.h; sourceTree = "<group>"; };
+		1764E73719E33D43004323F4 /* Recording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Recording.m; path = ../Recording.m; sourceTree = "<group>"; };
+		17C5F4DF19E0B01000559E97 /* StampNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StampNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		17C5F4E319E0B01000559E97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17C5F4E419E0B01000559E97 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		17C5F4E619E0B01000559E97 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		17C5F4E719E0B01000559E97 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		17C5F4EA19E0B01000559E97 /* StampNotes.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StampNotes.xcdatamodel; sourceTree = "<group>"; };
+		17C5F4F019E0B01000559E97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		17C5F4F219E0B01000559E97 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		17C5F4F519E0B01000559E97 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		17C5F4FB19E0B01000559E97 /* StampNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StampNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		17C5F50019E0B01000559E97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		17C5F50119E0B01000559E97 /* StampNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StampNotesTests.m; sourceTree = "<group>"; };
+		17C5F51119E224ED00559E97 /* SNMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNMainTableViewController.h; sourceTree = "<group>"; };
+		17C5F51219E224ED00559E97 /* SNMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNMainTableViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		17C5F4DC19E0B01000559E97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17C5F4F819E0B01000559E97 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		17C5F4D619E0B01000559E97 = {
+			isa = PBXGroup;
+			children = (
+				17C5F4E119E0B01000559E97 /* StampNotes */,
+				17C5F4FE19E0B01000559E97 /* StampNotesTests */,
+				17C5F4E019E0B01000559E97 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		17C5F4E019E0B01000559E97 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				17C5F4DF19E0B01000559E97 /* StampNotes.app */,
+				17C5F4FB19E0B01000559E97 /* StampNotesTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		17C5F4E119E0B01000559E97 /* StampNotes */ = {
+			isa = PBXGroup;
+			children = (
+				1764E73619E33D43004323F4 /* Recording.h */,
+				1764E73719E33D43004323F4 /* Recording.m */,
+				17C5F51119E224ED00559E97 /* SNMainTableViewController.h */,
+				17C5F51219E224ED00559E97 /* SNMainTableViewController.m */,
+				17C5F4E619E0B01000559E97 /* AppDelegate.h */,
+				17C5F4E719E0B01000559E97 /* AppDelegate.m */,
+				17C5F4EF19E0B01000559E97 /* Main.storyboard */,
+				1734F4CA19E3600300639716 /* RecordingScreenViewController.h */,
+				1734F4CB19E3600300639716 /* RecordingScreenViewController.m */,
+				1734F4C719E3561000639716 /* RecordingListTableViewController.h */,
+				1734F4C819E3561000639716 /* RecordingListTableViewController.m */,
+				17C5F4F219E0B01000559E97 /* Images.xcassets */,
+				17C5F4F419E0B01000559E97 /* LaunchScreen.xib */,
+				17C5F4E919E0B01000559E97 /* StampNotes.xcdatamodeld */,
+				17C5F4E219E0B01000559E97 /* Supporting Files */,
+			);
+			path = StampNotes;
+			sourceTree = "<group>";
+		};
+		17C5F4E219E0B01000559E97 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				17C5F4E319E0B01000559E97 /* Info.plist */,
+				17C5F4E419E0B01000559E97 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		17C5F4FE19E0B01000559E97 /* StampNotesTests */ = {
+			isa = PBXGroup;
+			children = (
+				17C5F50119E0B01000559E97 /* StampNotesTests.m */,
+				17C5F4FF19E0B01000559E97 /* Supporting Files */,
+			);
+			path = StampNotesTests;
+			sourceTree = "<group>";
+		};
+		17C5F4FF19E0B01000559E97 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				17C5F50019E0B01000559E97 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		17C5F4DE19E0B01000559E97 /* StampNotes */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17C5F50519E0B01000559E97 /* Build configuration list for PBXNativeTarget "StampNotes" */;
+			buildPhases = (
+				17C5F4DB19E0B01000559E97 /* Sources */,
+				17C5F4DC19E0B01000559E97 /* Frameworks */,
+				17C5F4DD19E0B01000559E97 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StampNotes;
+			productName = StampNotes;
+			productReference = 17C5F4DF19E0B01000559E97 /* StampNotes.app */;
+			productType = "com.apple.product-type.application";
+		};
+		17C5F4FA19E0B01000559E97 /* StampNotesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 17C5F50819E0B01000559E97 /* Build configuration list for PBXNativeTarget "StampNotesTests" */;
+			buildPhases = (
+				17C5F4F719E0B01000559E97 /* Sources */,
+				17C5F4F819E0B01000559E97 /* Frameworks */,
+				17C5F4F919E0B01000559E97 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17C5F4FD19E0B01000559E97 /* PBXTargetDependency */,
+			);
+			name = StampNotesTests;
+			productName = StampNotesTests;
+			productReference = 17C5F4FB19E0B01000559E97 /* StampNotesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		17C5F4D719E0B01000559E97 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Jiahe Kuang";
+				TargetAttributes = {
+					17C5F4DE19E0B01000559E97 = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+					17C5F4FA19E0B01000559E97 = {
+						CreatedOnToolsVersion = 6.0.1;
+						TestTargetID = 17C5F4DE19E0B01000559E97;
+					};
+				};
+			};
+			buildConfigurationList = 17C5F4DA19E0B01000559E97 /* Build configuration list for PBXProject "StampNotes" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 17C5F4D619E0B01000559E97;
+			productRefGroup = 17C5F4E019E0B01000559E97 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				17C5F4DE19E0B01000559E97 /* StampNotes */,
+				17C5F4FA19E0B01000559E97 /* StampNotesTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		17C5F4DD19E0B01000559E97 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17C5F4F119E0B01000559E97 /* Main.storyboard in Resources */,
+				17C5F4F619E0B01000559E97 /* LaunchScreen.xib in Resources */,
+				17C5F4F319E0B01000559E97 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17C5F4F919E0B01000559E97 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		17C5F4DB19E0B01000559E97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1734F4CC19E3600300639716 /* RecordingScreenViewController.m in Sources */,
+				1764E73819E33D43004323F4 /* Recording.m in Sources */,
+				17C5F4E819E0B01000559E97 /* AppDelegate.m in Sources */,
+				17C5F4EB19E0B01000559E97 /* StampNotes.xcdatamodeld in Sources */,
+				1734F4C919E3561000639716 /* RecordingListTableViewController.m in Sources */,
+				17C5F4E519E0B01000559E97 /* main.m in Sources */,
+				17C5F51319E224ED00559E97 /* SNMainTableViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17C5F4F719E0B01000559E97 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17C5F50219E0B01000559E97 /* StampNotesTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		17C5F4FD19E0B01000559E97 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 17C5F4DE19E0B01000559E97 /* StampNotes */;
+			targetProxy = 17C5F4FC19E0B01000559E97 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		17C5F4EF19E0B01000559E97 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17C5F4F019E0B01000559E97 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		17C5F4F419E0B01000559E97 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				17C5F4F519E0B01000559E97 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		17C5F50319E0B01000559E97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		17C5F50419E0B01000559E97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		17C5F50619E0B01000559E97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = StampNotes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		17C5F50719E0B01000559E97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = StampNotes/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		17C5F50919E0B01000559E97 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = StampNotesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StampNotes.app/StampNotes";
+			};
+			name = Debug;
+		};
+		17C5F50A19E0B01000559E97 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = StampNotesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/StampNotes.app/StampNotes";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		17C5F4DA19E0B01000559E97 /* Build configuration list for PBXProject "StampNotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17C5F50319E0B01000559E97 /* Debug */,
+				17C5F50419E0B01000559E97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17C5F50519E0B01000559E97 /* Build configuration list for PBXNativeTarget "StampNotes" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17C5F50619E0B01000559E97 /* Debug */,
+				17C5F50719E0B01000559E97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		17C5F50819E0B01000559E97 /* Build configuration list for PBXNativeTarget "StampNotesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				17C5F50919E0B01000559E97 /* Debug */,
+				17C5F50A19E0B01000559E97 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		17C5F4E919E0B01000559E97 /* StampNotes.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				17C5F4EA19E0B01000559E97 /* StampNotes.xcdatamodel */,
+			);
+			currentVersion = 17C5F4EA19E0B01000559E97 /* StampNotes.xcdatamodel */;
+			path = StampNotes.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 17C5F4D719E0B01000559E97 /* Project object */;
+}
