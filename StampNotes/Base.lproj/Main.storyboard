@@ -8,7 +8,7 @@
         <!--Recording Screen View Controller-->
         <scene sceneID="TLT-Z0-K5B">
             <objects>
-                <viewController id="sRs-gD-g5D" customClass="RecordingScreenViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RecordingViewController" id="sRs-gD-g5D" customClass="RecordingScreenViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wrX-kY-fKe"/>
                         <viewControllerLayoutGuide type="bottom" id="QqA-xG-0jY"/>
@@ -25,53 +25,78 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbQ-bt-7QS">
-                                <rect key="frame" x="277" y="489" width="46" height="30"/>
+                                <rect key="frame" x="268" y="516" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="5mt-Jo-01E"/>
-                                    <constraint firstAttribute="height" constant="30" id="Xmb-1X-RmE"/>
+                                    <constraint firstAttribute="width" constant="64" id="8Q2-9F-2M2"/>
+                                    <constraint firstAttribute="height" constant="64" id="WiP-7K-1KE"/>
                                 </constraints>
-                                <state key="normal" title="Pause">
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <state key="normal" title="Play">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="recordingPlay:" destination="sRs-gD-g5D" eventType="touchUpInside" id="cvx-4X-Nte"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMw-rn-4xb">
-                                <rect key="frame" x="32" y="489" width="46" height="30"/>
+                                <rect key="frame" x="16" y="516" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="hxu-m6-nwk"/>
-                                    <constraint firstAttribute="height" constant="30" id="j5I-h0-4WB"/>
+                                    <constraint firstAttribute="height" constant="64" id="OT8-Ym-8Gz"/>
+                                    <constraint firstAttribute="width" constant="64" id="g9E-gI-3bb"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Start">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="recordingStartOrPause:" destination="sRs-gD-g5D" eventType="touchUpInside" id="qyL-m2-gzB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rf-nw-r72">
-                                <rect key="frame" x="522" y="489" width="46" height="30"/>
+                                <rect key="frame" x="520" y="516" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="O4o-b2-pJT"/>
-                                    <constraint firstAttribute="height" constant="30" id="nsN-Vc-LCQ"/>
+                                    <constraint firstAttribute="width" constant="64" id="qbl-fg-MJu"/>
+                                    <constraint firstAttribute="height" constant="64" id="y0C-Vg-ERx"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Finish">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="recordingFinished:" destination="sRs-gD-g5D" eventType="touchUpInside" id="LZO-bi-Igv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="zbQ-bt-7QS" secondAttribute="centerX" id="4fR-yB-bHn"/>
-                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="cMw-rn-4xb" secondAttribute="bottom" constant="37" id="H5c-VA-uZW"/>
-                            <constraint firstItem="cMw-rn-4xb" firstAttribute="leading" secondItem="q5m-4W-NWz" secondAttribute="leadingMargin" constant="16" id="HPT-rR-phX"/>
-                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="zbQ-bt-7QS" secondAttribute="bottom" constant="37" id="Kvd-TX-Wbi"/>
+                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="cMw-rn-4xb" secondAttribute="bottom" constant="20" id="1v4-5f-Ehd"/>
+                            <constraint firstItem="cMw-rn-4xb" firstAttribute="leading" secondItem="q5m-4W-NWz" secondAttribute="leadingMargin" id="8Gf-SL-gUv"/>
+                            <constraint firstAttribute="centerX" secondItem="zbQ-bt-7QS" secondAttribute="centerX" id="Sgu-fC-sTB"/>
                             <constraint firstAttribute="centerX" secondItem="sO1-zP-535" secondAttribute="centerX" id="fDa-HX-Mdr"/>
                             <constraint firstAttribute="centerY" secondItem="sO1-zP-535" secondAttribute="centerY" id="fyy-z8-wrg"/>
-                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="6rf-nw-r72" secondAttribute="bottom" constant="37" id="rVl-I0-vko"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="6rf-nw-r72" secondAttribute="trailing" constant="16" id="t0V-o7-CqR"/>
+                            <constraint firstItem="6rf-nw-r72" firstAttribute="trailing" secondItem="q5m-4W-NWz" secondAttribute="trailingMargin" id="kSf-7W-vxs"/>
+                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="6rf-nw-r72" secondAttribute="bottom" constant="20" id="p7O-Jx-UA5"/>
+                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="zbQ-bt-7QS" secondAttribute="bottom" constant="20" id="tEq-nb-y7F"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Xz4-4H-AyP"/>
+                    <connections>
+                        <outlet property="finishedRecordingButton" destination="6rf-nw-r72" id="wXN-sf-Ap7"/>
+                        <outlet property="playRecordingButton" destination="zbQ-bt-7QS" id="1b7-4s-HMz"/>
+                        <outlet property="startRecordingButton" destination="cMw-rn-4xb" id="zrP-Iu-Xx8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qd7-KX-AWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1389" y="-532"/>
+            <point key="canvasLocation" x="2092" y="-390"/>
+        </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="ZS1-4z-Mj2">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="Z7U-SH-1fi" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EcI-Hj-obY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2772" y="291"/>
         </scene>
         <!--Main Table View Controller-->
         <scene sceneID="kTf-0D-Uvl">
@@ -100,13 +125,10 @@
                     <navigationItem key="navigationItem" id="A5w-h2-KW9">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="frO-0k-F9U">
                             <connections>
-                                <action selector="createNewClass:" destination="M0Q-ZI-e1d" id="UXQ-me-M3h"/>
+                                <segue destination="sRs-gD-g5D" kind="show" identifier="newRecordingSession" id="kZO-OO-L1E"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <segue destination="sRs-gD-g5D" kind="show" identifier="RecordingScreen" id="89d-TO-svY"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bec-EP-AcW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -121,11 +143,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="A20-5v-EUE">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecordingDetailView" id="A20-5v-EUE">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A20-5v-EUE" id="BHl-qK-qx8">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Z7U-SH-1fi" kind="show" id="bCV-cO-byc"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -146,7 +171,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7s9-85-iBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2251" y="291"/>
+            <point key="canvasLocation" x="2092" y="291"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lvI-2w-zch">
@@ -168,6 +193,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="E97-oP-amH"/>
+        <segue reference="kZO-OO-L1E"/>
     </inferredMetricsTieBreakers>
 </document>
