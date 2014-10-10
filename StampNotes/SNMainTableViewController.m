@@ -8,11 +8,14 @@
 
 #import "SNMainTableViewController.h"
 #import "Recording.h"
-#import "RecordingScreenViewController.h"
+#import "RecordingListTableViewController.h"
 #import "AppDelegate.h"
 
 
+
 @interface SNMainTableViewController ()
+
+
 
 @end
 
@@ -37,6 +40,11 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSError *error;
+    NSLog(@"Documents directory: %@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[paths objectAtIndex:0] error:&error]);
+    
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -84,21 +92,18 @@
 {
     if ([segue.identifier isEqualToString:@"newRecordingSession"])
     {
-        NSManagedObjectContext *recordingContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
+        RecordingScreenViewController* newRecordingScreenViewController = [RecordingScreenViewController new];
+        newRecordingScreenViewController = [segue destinationViewController];
+        newRecordingScreenViewController.delegate = self;
+    }
+    
+    else if ([segue.identifier isEqualToString:@"RecordingListView"])
+    {
+        RecordingListTableViewController *newRecordingListTableViewController = [RecordingListTableViewController new];
         
-        Recording *newRecording = [NSEntityDescription insertNewObjectForEntityForName:@"Recording" inManagedObjectContext:recordingContext];
-        
-        newRecording.date = [NSDate date];
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        
-        [dateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
-        
-        newRecording.name = [NSString stringWithFormat:@"Note(s) %@", [dateFormatter stringFromDate:newRecording.date]];
-        
-        [self.recordings addObject:newRecording];
-        [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
-
+        newRecordingListTableViewController = [segue destinationViewController];
+        NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+        newRecordingListTableViewController.currentAlbumFolderPath = [self.recordings[selectedIndexPath.row] folderDirectory];
     }
 }
 
@@ -109,16 +114,60 @@
     NSManagedObjectContext *candyContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     
+    [[NSFileManager defaultManager] removeItemAtPath:[self.recordings[indexPath.row] folderDirectory] error:nil];
+    
+    NSLog(@"Deleting %@", [self.recordings[indexPath.row] folderDirectory]);
+    
     [candyContext deleteObject: self.recordings[indexPath.row]];
     
     [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
     
+
     
     [self.recordings removeObjectAtIndex:indexPath.row];
     
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
 }
+
+-(NSString*)directoryForNewRecording
+{
+    NSManagedObjectContext *recordingContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
+    
+    Recording *newRecording = [NSEntityDescription insertNewObjectForEntityForName:@"Recording" inManagedObjectContext:recordingContext];
+    
+    newRecording.date = [NSDate date];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss-a"];
+    
+    newRecording.name = [NSString stringWithFormat:@"Album_%@", [dateFormatter stringFromDate:newRecording.date]];
+    
+    
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    NSString * path = [[paths objectAtIndex:0] stringByAppendingPathComponent:newRecording.name];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:path])
+    {
+        [[NSFileManager defaultManager] createDirectoryAtPath:path
+                                  withIntermediateDirectories:NO
+                                                   attributes:nil
+                                                        error: nil];
+    }
+    
+    newRecording.folderDirectory = path;
+    [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
+    [self.recordings addObject:newRecording];
+
+    
+    NSLog(@"Creating %@", newRecording.folderDirectory);
+    
+    return newRecording.folderDirectory;
+}
+
 
 
 @end

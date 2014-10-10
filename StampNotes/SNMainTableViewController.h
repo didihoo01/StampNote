@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RecordingScreenViewController.h"
 
-@interface SNMainTableViewController : UITableViewController<UIAlertViewDelegate>
 
-@property(nonatomic, strong) NSMutableArray* recordings;
+@interface SNMainTableViewController : UITableViewController<RecordingScreenViewControllerDelegate>
+
+
+
+@property(nonatomic, strong) NSMutableArray *recordings;
+
 
 @end

@@ -25,10 +25,10 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbQ-bt-7QS">
-                                <rect key="frame" x="268" y="516" width="64" height="64"/>
+                                <rect key="frame" x="268" y="492" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="8Q2-9F-2M2"/>
-                                    <constraint firstAttribute="height" constant="64" id="WiP-7K-1KE"/>
+                                    <constraint firstAttribute="height" constant="64" id="Bq8-p6-GqN"/>
+                                    <constraint firstAttribute="width" constant="64" id="HVu-4l-6ZL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Play">
@@ -39,10 +39,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMw-rn-4xb">
-                                <rect key="frame" x="16" y="516" width="64" height="64"/>
+                                <rect key="frame" x="16" y="492" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="OT8-Ym-8Gz"/>
-                                    <constraint firstAttribute="width" constant="64" id="g9E-gI-3bb"/>
+                                    <constraint firstAttribute="height" constant="64" id="N5a-GU-Vud"/>
+                                    <constraint firstAttribute="width" constant="64" id="Ubf-s6-tqc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Start">
@@ -53,10 +53,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rf-nw-r72">
-                                <rect key="frame" x="520" y="516" width="64" height="64"/>
+                                <rect key="frame" x="520" y="492" width="64" height="64"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="64" id="qbl-fg-MJu"/>
-                                    <constraint firstAttribute="height" constant="64" id="y0C-Vg-ERx"/>
+                                    <constraint firstAttribute="height" constant="64" id="00E-1V-RaM"/>
+                                    <constraint firstAttribute="width" constant="64" id="eN9-NL-Qxb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Finish">
@@ -69,14 +69,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="cMw-rn-4xb" secondAttribute="bottom" constant="20" id="1v4-5f-Ehd"/>
-                            <constraint firstItem="cMw-rn-4xb" firstAttribute="leading" secondItem="q5m-4W-NWz" secondAttribute="leadingMargin" id="8Gf-SL-gUv"/>
-                            <constraint firstAttribute="centerX" secondItem="zbQ-bt-7QS" secondAttribute="centerX" id="Sgu-fC-sTB"/>
+                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="cMw-rn-4xb" secondAttribute="bottom" id="8Vj-bW-LGy"/>
+                            <constraint firstItem="cMw-rn-4xb" firstAttribute="leading" secondItem="q5m-4W-NWz" secondAttribute="leadingMargin" id="TCO-8N-qo6"/>
+                            <constraint firstAttribute="centerX" secondItem="zbQ-bt-7QS" secondAttribute="centerX" id="aet-Oa-ntC"/>
                             <constraint firstAttribute="centerX" secondItem="sO1-zP-535" secondAttribute="centerX" id="fDa-HX-Mdr"/>
                             <constraint firstAttribute="centerY" secondItem="sO1-zP-535" secondAttribute="centerY" id="fyy-z8-wrg"/>
-                            <constraint firstItem="6rf-nw-r72" firstAttribute="trailing" secondItem="q5m-4W-NWz" secondAttribute="trailingMargin" id="kSf-7W-vxs"/>
-                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="6rf-nw-r72" secondAttribute="bottom" constant="20" id="p7O-Jx-UA5"/>
-                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="zbQ-bt-7QS" secondAttribute="bottom" constant="20" id="tEq-nb-y7F"/>
+                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="zbQ-bt-7QS" secondAttribute="bottom" id="gGl-Pi-ZTb"/>
+                            <constraint firstItem="6rf-nw-r72" firstAttribute="trailing" secondItem="q5m-4W-NWz" secondAttribute="trailingMargin" id="qfQ-9X-G6I"/>
+                            <constraint firstItem="QqA-xG-0jY" firstAttribute="top" secondItem="6rf-nw-r72" secondAttribute="bottom" id="yV6-pM-s6c"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Xz4-4H-AyP"/>
@@ -88,15 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qd7-KX-AWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2092" y="-390"/>
-        </scene>
-        <!--AV Player View Controller-->
-        <scene sceneID="ZS1-4z-Mj2">
-            <objects>
-                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="Z7U-SH-1fi" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EcI-Hj-obY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2772" y="291"/>
+            <point key="canvasLocation" x="2092" y="-432"/>
         </scene>
         <!--Main Table View Controller-->
         <scene sceneID="kTf-0D-Uvl">
@@ -113,7 +105,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="UXw-y9-EKL" kind="show" id="0wl-1h-4nG"/>
+                                    <segue destination="UXw-y9-EKL" kind="show" identifier="RecordingListView" id="0wl-1h-4nG"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -123,7 +115,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="A5w-h2-KW9">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="frO-0k-F9U">
+                        <barButtonItem key="rightBarButtonItem" title="New Album" id="frO-0k-F9U">
                             <connections>
                                 <segue destination="sRs-gD-g5D" kind="show" identifier="newRecordingSession" id="kZO-OO-L1E"/>
                             </connections>
@@ -137,7 +129,7 @@
         <!--Recording List Table View Controller-->
         <scene sceneID="u5T-n1-hzX">
             <objects>
-                <tableViewController id="UXw-y9-EKL" customClass="RecordingListTableViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SNMainTableView" id="UXw-y9-EKL" customClass="RecordingListTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ZTg-b0-8UC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,9 +140,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A20-5v-EUE" id="BHl-qK-qx8">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="Z7U-SH-1fi" kind="show" id="bCV-cO-byc"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -163,7 +152,7 @@
                         <nil key="title"/>
                         <barButtonItem key="rightBarButtonItem" title="Add" id="uhp-7t-7ZI">
                             <connections>
-                                <segue destination="sRs-gD-g5D" kind="show" id="E97-oP-amH"/>
+                                <segue destination="sRs-gD-g5D" kind="show" identifier="AddNewRecordingToCurrentAlbum" id="E97-oP-amH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -171,7 +160,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7s9-85-iBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2092" y="291"/>
+            <point key="canvasLocation" x="2110" y="291"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lvI-2w-zch">
@@ -193,6 +182,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kZO-OO-L1E"/>
+        <segue reference="E97-oP-amH"/>
     </inferredMetricsTieBreakers>
 </document>

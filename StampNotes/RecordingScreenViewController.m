@@ -19,24 +19,31 @@
 @property (weak, nonatomic) IBOutlet UIButton *playRecordingButton;
 
 
+
+
 @end
 
 @implementation RecordingScreenViewController
+
+
+@synthesize delegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self.finishedRecordingButton setEnabled:NO];
     [self.playRecordingButton setEnabled:NO];
+
+                               
+    NSDate *tempDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
-    // Set the audio file
-    NSArray *pathComponents = [NSArray arrayWithObjects:
-                               [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject],
-                               @"demo.m4a",
-                               nil];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss-a"];
+    
+    NSString *tempString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:tempDate]];
     
     
-    NSURL *outputFileURL = [NSURL fileURLWithPathComponents:pathComponents];
+    NSURL *outputFileURL = [NSURL fileURLWithPath: [NSString stringWithFormat:@"%@/%@.m4a", [[self delegate] directoryForNewRecording], tempString]];
     
     // Setup audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -72,6 +79,9 @@
     }
 
 }
+
+
+
 
 - (IBAction)recordingStartOrPause:(id)sender
 {
@@ -112,6 +122,7 @@
     
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setActive:NO error:nil];
+    
 //    [self.navigationController popViewControllerAnimated:YES];
 
 }

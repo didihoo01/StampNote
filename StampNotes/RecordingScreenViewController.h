@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol RecordingScreenViewControllerDelegate
+
+-(NSString*)directoryForNewRecording;
+
+@end
 
 @interface RecordingScreenViewController : UIViewController
+
+@property (nonatomic, assign) NSString *recordingForFilePath;
+@property (nonatomic, assign) id <RecordingScreenViewControllerDelegate> delegate;
 
 @end

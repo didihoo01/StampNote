@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RecordingScreenViewController.h"
 
-@interface RecordingListTableViewController : UITableViewController
+@interface RecordingListTableViewController : UITableViewController <RecordingScreenViewControllerDelegate>
 
-@property (strong, nonatomic) NSMutableArray * recordingListUnderTitle;
+@property (strong, nonatomic) NSMutableArray * recordingList;
+@property (assign, nonatomic) NSString * currentAlbumFolderPath;
 
 @end
