@@ -13,7 +13,6 @@
 @interface RecordingListTableViewController ()
 
 
-
 @end
 
 @implementation RecordingListTableViewController
@@ -21,13 +20,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+
+
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 
+    self.recordingList = [NSMutableArray new];
+    
+    NSError *error;
+    
+    NSLog(@"At %@", self.currentAlbumFolderPath);
+    
+    self.recordingList = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.currentAlbumFolderPath error:&error] mutableCopy];
+    
+    [self.tableView reloadData];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -39,7 +53,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecordingDetailView" forIndexPath:indexPath];
     
-//    cell.textLabel.text = [self.recordingList[indexPath.row] name];
+    cell.textLabel.text = self.recordingList[indexPath.row];
     
     return cell;
 }
@@ -48,8 +62,9 @@
 {
     if ([segue.identifier isEqualToString:@"AddNewRecordingToCurrentAlbum"])
     {
-        RecordingScreenViewController *newRecordingScreenViewController = [RecordingScreenViewController new];
-        newRecordingScreenViewController = [segue destinationViewController];
+        RecordingScreenViewController *newRecordingScreenViewController = [segue destinationViewController];
+        newRecordingScreenViewController.delegate = self;
+
         
     }
 }

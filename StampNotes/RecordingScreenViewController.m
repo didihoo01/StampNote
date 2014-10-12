@@ -20,7 +20,6 @@
 
 
 
-
 @end
 
 @implementation RecordingScreenViewController
@@ -34,7 +33,8 @@
     [self.finishedRecordingButton setEnabled:NO];
     [self.playRecordingButton setEnabled:NO];
 
-                               
+
+    self.recordingForFilePath = [[self delegate] directoryForNewRecording];
     NSDate *tempDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
@@ -42,8 +42,7 @@
     
     NSString *tempString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:tempDate]];
     
-    
-    NSURL *outputFileURL = [NSURL fileURLWithPath: [NSString stringWithFormat:@"%@/%@.m4a", [[self delegate] directoryForNewRecording], tempString]];
+    NSURL *outputFileURL = [NSURL fileURLWithPath: [NSString stringWithFormat:@"%@/%@.m4a", self.recordingForFilePath, tempString]];
     
     // Setup audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -61,6 +60,12 @@
     self.recorder.delegate = self;
     self.recorder.meteringEnabled = YES;
     [self.recorder prepareToRecord];
+    
+    NSError *error;
+    
+    NSLog(@"%@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.recordingForFilePath error:&error]);
+    
+
     
     // Do any additional setup after loading the view.
 }

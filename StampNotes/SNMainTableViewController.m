@@ -92,18 +92,16 @@
 {
     if ([segue.identifier isEqualToString:@"newRecordingSession"])
     {
-        RecordingScreenViewController* newRecordingScreenViewController = [RecordingScreenViewController new];
-        newRecordingScreenViewController = [segue destinationViewController];
+        RecordingScreenViewController* newRecordingScreenViewController = [segue destinationViewController];
         newRecordingScreenViewController.delegate = self;
     }
     
     else if ([segue.identifier isEqualToString:@"RecordingListView"])
     {
-        RecordingListTableViewController *newRecordingListTableViewController = [RecordingListTableViewController new];
-        
-        newRecordingListTableViewController = [segue destinationViewController];
+        RecordingListTableViewController *newRecordingListTableViewController = [segue destinationViewController];
         NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
         newRecordingListTableViewController.currentAlbumFolderPath = [self.recordings[selectedIndexPath.row] folderDirectory];
+
     }
 }
 
