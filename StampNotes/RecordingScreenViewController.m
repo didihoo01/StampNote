@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *playRecordingButton;
 
 
+@property (strong, nonatomic) NSURL *recordingURL;
+
+
 
 @end
 
@@ -42,7 +45,7 @@
     
     NSString *tempString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:tempDate]];
     
-    NSURL *outputFileURL = [NSURL fileURLWithPath: [NSString stringWithFormat:@"%@/%@.m4a", self.recordingForFilePath, tempString]];
+    self.recordingURL = [NSURL fileURLWithPath: [NSString stringWithFormat:@"%@/%@.m4a", self.recordingForFilePath, tempString]];
     
     // Setup audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -56,7 +59,7 @@
     [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
     
     // Initiate and prepare the recorder
-    self.recorder = [[AVAudioRecorder alloc] initWithURL:outputFileURL settings:recordSetting error:NULL];
+    self.recorder = [[AVAudioRecorder alloc] initWithURL:self.recordingURL settings:recordSetting error:NULL];
     self.recorder.delegate = self;
     self.recorder.meteringEnabled = YES;
     [self.recorder prepareToRecord];
@@ -148,6 +151,21 @@
     [alert show];
 }
 
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:self.recordingURL options:nil];
+    CMTime audioDuration = audioAsset.duration;
+    float audioDurationSeconds = CMTimeGetSeconds(audioDuration);
+    NSLog(@"Recording is %f seconds long", audioDurationSeconds);
+    
+    if (audioDurationSeconds < 1)
+    {
+        [[NSFileManager defaultManager] removeItemAtURL:self.recordingURL error:nil];
+    }
+    
+}
 /*
 #pragma mark - Navigation
 

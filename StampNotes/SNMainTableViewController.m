@@ -107,7 +107,8 @@
 
 
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
     
     NSManagedObjectContext *candyContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
     
