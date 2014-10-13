@@ -9,6 +9,7 @@
 #import "RecordingListTableViewController.h"
 #import "Recording.h"
 #import "AppDelegate.h"
+#import "RecordingDetailViewController.h"
 
 @interface RecordingListTableViewController ()
 
@@ -64,8 +65,14 @@
     {
         RecordingScreenViewController *newRecordingScreenViewController = [segue destinationViewController];
         newRecordingScreenViewController.delegate = self;
-
-        
+    }
+    
+    else if ([segue.identifier isEqualToString:@"RecordingDetailView"])
+    {
+        RecordingDetailViewController *newRecordingDetailViewController = [segue destinationViewController];
+        NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+        newRecordingDetailViewController.recordingFilePath = [NSString stringWithFormat:@"%@/%@", self.currentAlbumFolderPath, self.recordingList[selectedIndexPath.row]];
+        NSLog(@"%@", newRecordingDetailViewController.recordingFilePath);
     }
 }
 

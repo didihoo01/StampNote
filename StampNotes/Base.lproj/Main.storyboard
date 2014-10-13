@@ -88,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qd7-KX-AWq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2092" y="-432"/>
+            <point key="canvasLocation" x="1752" y="1244"/>
         </scene>
         <!--Main Table View Controller-->
         <scene sceneID="kTf-0D-Uvl">
@@ -140,6 +140,9 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A20-5v-EUE" id="BHl-qK-qx8">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="URk-EB-Mss" kind="show" identifier="RecordingDetailView" id="KEY-Ji-8hM"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -161,6 +164,46 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7s9-85-iBA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2110" y="291"/>
+        </scene>
+        <!--Recording Detail View Controller-->
+        <scene sceneID="ebt-z0-4ho">
+            <objects>
+                <viewController id="URk-EB-Mss" customClass="RecordingDetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="e7P-Ga-Lgu"/>
+                        <viewControllerLayoutGuide type="bottom" id="Tf3-L8-x6V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xV3-00-Oec">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fsS-0d-6w9">
+                                <rect key="frame" x="279" y="518" width="43" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="YJq-ei-gFM"/>
+                                    <constraint firstAttribute="width" constant="43" id="ev7-FY-IDe"/>
+                                </constraints>
+                                <state key="normal" title="Play">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playPauseRecording:" destination="URk-EB-Mss" eventType="touchUpInside" id="pUU-fI-xFI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Tf3-L8-x6V" firstAttribute="top" secondItem="fsS-0d-6w9" secondAttribute="bottom" constant="8" id="2vu-21-aVv"/>
+                            <constraint firstAttribute="centerX" secondItem="fsS-0d-6w9" secondAttribute="centerX" id="ury-di-KYt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="playPauseButton" destination="fsS-0d-6w9" id="C4a-KR-vlc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="za5-b2-Cok" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2888" y="291"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="lvI-2w-zch">

@@ -12,6 +12,7 @@
 		1734F4CE19E467A900639716 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1734F4CD19E467A900639716 /* AVFoundation.framework */; };
 		1764E73819E33D43004323F4 /* Recording.m in Sources */ = {isa = PBXBuildFile; fileRef = 1764E73719E33D43004323F4 /* Recording.m */; };
 		1794616919E70D68009515F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1794616819E70D68009515F5 /* Foundation.framework */; };
+		17ACE49E19EB6469001EE564 /* RecordingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17ACE49D19EB6469001EE564 /* RecordingDetailViewController.m */; };
 		17C5F4E519E0B01000559E97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E419E0B01000559E97 /* main.m */; };
 		17C5F4E819E0B01000559E97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E719E0B01000559E97 /* AppDelegate.m */; };
 		17C5F4EB19E0B01000559E97 /* StampNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E919E0B01000559E97 /* StampNotes.xcdatamodeld */; };
@@ -41,6 +42,8 @@
 		1764E73619E33D43004323F4 /* Recording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Recording.h; path = ../Recording.h; sourceTree = "<group>"; };
 		1764E73719E33D43004323F4 /* Recording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Recording.m; path = ../Recording.m; sourceTree = "<group>"; };
 		1794616819E70D68009515F5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		17ACE49C19EB6469001EE564 /* RecordingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordingDetailViewController.h; sourceTree = "<group>"; };
+		17ACE49D19EB6469001EE564 /* RecordingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordingDetailViewController.m; sourceTree = "<group>"; };
 		17C5F4DF19E0B01000559E97 /* StampNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StampNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17C5F4E319E0B01000559E97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17C5F4E419E0B01000559E97 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -107,6 +110,8 @@
 				17C5F4E619E0B01000559E97 /* AppDelegate.h */,
 				17C5F4E719E0B01000559E97 /* AppDelegate.m */,
 				17C5F4EF19E0B01000559E97 /* Main.storyboard */,
+				17ACE49C19EB6469001EE564 /* RecordingDetailViewController.h */,
+				17ACE49D19EB6469001EE564 /* RecordingDetailViewController.m */,
 				1734F4CA19E3600300639716 /* RecordingScreenViewController.h */,
 				1734F4CB19E3600300639716 /* RecordingScreenViewController.m */,
 				1734F4C719E3561000639716 /* RecordingListTableViewController.h */,
@@ -246,6 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1734F4CC19E3600300639716 /* RecordingScreenViewController.m in Sources */,
+				17ACE49E19EB6469001EE564 /* RecordingDetailViewController.m in Sources */,
 				1764E73819E33D43004323F4 /* Recording.m in Sources */,
 				17C5F4E819E0B01000559E97 /* AppDelegate.m in Sources */,
 				17C5F4EB19E0B01000559E97 /* StampNotes.xcdatamodeld in Sources */,
