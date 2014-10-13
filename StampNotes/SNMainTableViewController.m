@@ -21,6 +21,8 @@
 
 @implementation SNMainTableViewController
 
+#pragma message "Remove empty method stubs"
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -46,6 +48,8 @@
     NSLog(@"Documents directory: %@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[paths objectAtIndex:0] error:&error]);
     
 }
+
+#pragma message "Init method should be the first method in this class"
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     
@@ -105,7 +109,7 @@
     }
 }
 
-
+#pragma message "Try to be more consistent with your use of empty lines"
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -135,6 +139,7 @@
     Recording *newRecording = [NSEntityDescription insertNewObjectForEntityForName:@"Recording" inManagedObjectContext:recordingContext];
     
     newRecording.date = [NSDate date];
+#pragma message "Ideally you should create the date formatter as a class-level (static) variable. Initializing date formatters is pretty expensive so you want to avoid doing it more often than necessary"
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     

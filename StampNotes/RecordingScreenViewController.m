@@ -33,11 +33,12 @@
     [self.finishedRecordingButton setEnabled:NO];
     [self.playRecordingButton setEnabled:NO];
 
-
+#pragma message "You should access the delegate property with dot syntax instead"
     self.recordingForFilePath = [[self delegate] directoryForNewRecording];
     NSDate *tempDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
+
+#pragma message "Ideally you should create the date formatter as a class-level (static) variable. Initializing date formatters is pretty expensive so you want to avoid doing it more often than necessary"
     [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss-a"];
     
     NSString *tempString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:tempDate]];
@@ -69,6 +70,8 @@
     
     // Do any additional setup after loading the view.
 }
+
+#pragma message "Remove empty stub methods"
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
