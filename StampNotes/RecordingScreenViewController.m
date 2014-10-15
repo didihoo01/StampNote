@@ -8,6 +8,8 @@
 
 #import "RecordingScreenViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "Recording.h"
+#import "AppDelegate.h"
 
 
 @interface RecordingScreenViewController () <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
@@ -20,6 +22,14 @@
 
 
 @property (strong, nonatomic) NSURL *recordingURL;
+@property (strong, nonatomic) NSString *timeMarksFilePath;
+@property (strong, nonatomic) NSMutableArray * timeMarksArray;
+
+@property (strong, nonatomic) NSTimer *scheduleTimer;
+@property (assign, nonatomic) int stampButtonLable;
+@property (weak, nonatomic) IBOutlet UIButton *stampButton;
+
+@property (assign, nonatomic) float previousTime;
 
 
 
@@ -33,8 +43,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.scheduleTimer = nil;
+    self.stampTimer = 0.0;
+    self.stampButtonLable = 1;
+    self.previousTime = 0.0;
+    
     [self.finishedRecordingButton setEnabled:NO];
     [self.playRecordingButton setEnabled:NO];
+
+    
+    self.timeMarksArray = [NSMutableArray new];
 
 
     self.recordingForFilePath = [[self delegate] directoryForNewRecording];
@@ -46,6 +64,7 @@
     NSString *tempString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:tempDate]];
     
     self.recordingURL = [NSURL fileURLWithPath: [NSString stringWithFormat:@"%@/%@.m4a", self.recordingForFilePath, tempString]];
+    self.timeMarksFilePath = [NSString stringWithFormat:@"%@/%@.txt", self.recordingForFilePath, tempString];
     
     // Setup audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
@@ -68,6 +87,7 @@
     
     NSLog(@"%@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.recordingForFilePath error:&error]);
     
+    [self.timeMarksArray addObject:[NSString stringWithFormat:@"0.0\n"]];
 
     
     // Do any additional setup after loading the view.
@@ -101,7 +121,17 @@
     }
     
     //When it is not recording, it will start a new recording
-    if (!self.recorder.recording) {
+    if (!self.recorder.recording)
+    {
+        
+        if (!self.scheduleTimer)
+        {
+            self.stampTimer = self.previousTime;
+            self.scheduleTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateStampTimer) userInfo:nil repeats:YES];
+        }
+
+
+        
         AVAudioSession *session = [AVAudioSession sharedInstance];
         
         [session setActive:YES error:nil];
@@ -109,12 +139,22 @@
         //start recroding
         [self.recorder record];
         [self.startRecordingButton setTitle:@"Pause" forState:UIControlStateNormal];
+        
+        
+        
+        
+        
+        
     }
     
     //when it is recording, we want to pause
     else
     {
         [self.recorder pause];
+        self.previousTime = self.stampTimer;
+        self.stampTimer = 0.0;
+        [self killTimer];
+        
         [self.startRecordingButton setTitle:@"Start" forState:UIControlStateNormal];
     }
     
@@ -127,9 +167,19 @@
 - (IBAction)recordingFinished:(id)sender
 {
     [self.recorder stop];
+    [self killTimer];
+    
     
     AVAudioSession *audioSession = [AVAudioSession sharedInstance];
     [audioSession setActive:NO error:nil];
+    
+    
+    NSString *timeStampsInString = [[self.timeMarksArray valueForKey:@"description"] componentsJoinedByString:@""];
+    NSData* tempDataBuffer = [timeStampsInString dataUsingEncoding:NSASCIIStringEncoding];
+    
+    [[NSFileManager defaultManager] createFileAtPath:self.timeMarksFilePath contents:tempDataBuffer attributes:nil];
+    
+    
     
 //    [self.navigationController popViewControllerAnimated:YES];
 
@@ -166,6 +216,38 @@
     }
     
 }
+
+-(void)updateStampTimer
+{
+    self.stampTimer = self.stampTimer+0.1;
+}
+
+- (IBAction)stampTime:(id)sender
+{
+    
+    if (self.recorder.recording)
+    {
+        self.stampButtonLable = self.stampButtonLable + 1;
+        [self.stampButton setTitle:[NSString stringWithFormat:@"%d", self.stampButtonLable] forState:UIControlStateNormal];
+        
+        NSLog(@"%.2f", self.stampTimer);
+        
+        [self.timeMarksArray addObject:[NSString stringWithFormat:@"%.2f\n", self.stampTimer]];
+    }
+
+}
+
+- (void)killTimer
+{
+    if (self.scheduleTimer)
+    {
+
+        [self.scheduleTimer invalidate];
+        self.scheduleTimer = nil;
+
+    }
+}
+
 /*
 #pragma mark - Navigation
 

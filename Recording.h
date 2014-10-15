@@ -16,4 +16,5 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * folderDirectory;
 
+
 @end

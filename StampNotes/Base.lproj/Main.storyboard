@@ -20,11 +20,12 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sO1-zP-535">
                                 <rect key="frame" x="248" y="179" width="105" height="242"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="192"/>
-                                <state key="normal" title="0">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" title="1"/>
+                                <connections>
+                                    <action selector="stampTime:" destination="sRs-gD-g5D" eventType="touchUpInside" id="gZu-6v-XHN"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbQ-bt-7QS">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zbQ-bt-7QS">
                                 <rect key="frame" x="268" y="492" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Bq8-p6-GqN"/>
@@ -38,7 +39,7 @@
                                     <action selector="recordingPlay:" destination="sRs-gD-g5D" eventType="touchUpInside" id="cvx-4X-Nte"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMw-rn-4xb">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cMw-rn-4xb">
                                 <rect key="frame" x="16" y="492" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="N5a-GU-Vud"/>
@@ -52,7 +53,7 @@
                                     <action selector="recordingStartOrPause:" destination="sRs-gD-g5D" eventType="touchUpInside" id="qyL-m2-gzB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rf-nw-r72">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6rf-nw-r72">
                                 <rect key="frame" x="520" y="492" width="64" height="64"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="00E-1V-RaM"/>
@@ -83,6 +84,7 @@
                     <connections>
                         <outlet property="finishedRecordingButton" destination="6rf-nw-r72" id="wXN-sf-Ap7"/>
                         <outlet property="playRecordingButton" destination="zbQ-bt-7QS" id="1b7-4s-HMz"/>
+                        <outlet property="stampButton" destination="sO1-zP-535" id="e2e-oH-fdS"/>
                         <outlet property="startRecordingButton" destination="cMw-rn-4xb" id="zrP-Iu-Xx8"/>
                     </connections>
                 </viewController>
@@ -190,15 +192,36 @@
                                     <action selector="playPauseRecording:" destination="URk-EB-Mss" eventType="touchUpInside" id="pUU-fI-xFI"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="6v7-bK-FfM">
+                                <rect key="frame" x="0.0" y="64" width="600" height="446"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="timeStamp" id="EV1-vY-b8Y">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EV1-vY-b8Y" id="b33-4X-MvO">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="URk-EB-Mss" id="qms-82-0lQ"/>
+                                    <outlet property="delegate" destination="URk-EB-Mss" id="0nK-OS-zhS"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Tf3-L8-x6V" firstAttribute="top" secondItem="fsS-0d-6w9" secondAttribute="bottom" constant="8" id="2vu-21-aVv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="6v7-bK-FfM" secondAttribute="trailing" constant="-16" id="64H-ob-t5L"/>
+                            <constraint firstItem="6v7-bK-FfM" firstAttribute="top" secondItem="e7P-Ga-Lgu" secondAttribute="bottom" id="HXY-NW-bs5"/>
+                            <constraint firstItem="6v7-bK-FfM" firstAttribute="leading" secondItem="xV3-00-Oec" secondAttribute="leadingMargin" constant="-16" id="UT6-hf-bFx"/>
+                            <constraint firstItem="fsS-0d-6w9" firstAttribute="top" secondItem="6v7-bK-FfM" secondAttribute="bottom" constant="8" id="jYv-2J-j19"/>
                             <constraint firstAttribute="centerX" secondItem="fsS-0d-6w9" secondAttribute="centerX" id="ury-di-KYt"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="playPauseButton" destination="fsS-0d-6w9" id="C4a-KR-vlc"/>
+                        <outlet property="timeStamps" destination="6v7-bK-FfM" id="2Ne-Ib-cEl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="za5-b2-Cok" userLabel="First Responder" sceneMemberID="firstResponder"/>

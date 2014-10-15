@@ -94,6 +94,7 @@
     {
         RecordingScreenViewController* newRecordingScreenViewController = [segue destinationViewController];
         newRecordingScreenViewController.delegate = self;
+        
     }
     
     else if ([segue.identifier isEqualToString:@"RecordingListView"])
@@ -159,6 +160,7 @@
     
     newRecording.folderDirectory = path;
     [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
+    
     [self.recordings addObject:newRecording];
 
     

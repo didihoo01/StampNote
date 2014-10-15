@@ -17,5 +17,7 @@
 
 @property (nonatomic, assign) NSString *recordingForFilePath;
 @property (nonatomic, assign) id <RecordingScreenViewControllerDelegate> delegate;
+@property (nonatomic, assign) float stampTimer;
+
 
 @end

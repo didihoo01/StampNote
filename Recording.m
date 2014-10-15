@@ -14,5 +14,4 @@
 @dynamic name;
 @dynamic date;
 @dynamic folderDirectory;
-
 @end

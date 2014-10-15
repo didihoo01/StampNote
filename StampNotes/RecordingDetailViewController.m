@@ -19,14 +19,47 @@
 
 @implementation RecordingDetailViewController
 
-- (void)viewDidLoad {
+
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     NSURL *recordingURL = [NSURL fileURLWithPath:self.recordingFilePath];
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:recordingURL error:nil];
     [self.player setDelegate:self];
+    
+    NSLog(@"%@", self.stampsFilePath);
 
+    NSString *tempTimeStampString = [NSString stringWithContentsOfFile:self.stampsFilePath encoding:NSASCIIStringEncoding error:NULL];
+    
+    
+    NSLog(@"%@", tempTimeStampString);
+    
+    
+    self.timeStamps = [[NSMutableArray alloc] initWithArray:[tempTimeStampString componentsSeparatedByString:@"\n"]];
+    
+    //it removes the termination point at the end of the string that was stored as a component
+    [self.timeStamps removeLastObject];
 }
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.timeStamps count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timeStamp" forIndexPath:indexPath];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"Label %d at %@ second", indexPath.row + 1, self.timeStamps[indexPath.row]];
+    
+    return cell;
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -57,6 +90,32 @@
     
     [self.playPauseButton setTitle:@"Play" forState:UIControlStateNormal];
 }
+
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    float selectedTimeStamp = [self.timeStamps[indexPath.row] floatValue];
+    
+    NSLog(@"%f", selectedTimeStamp);
+    
+    if (selectedTimeStamp > 3.0)
+    {
+        self.player.currentTime = selectedTimeStamp - 3.0;
+        [self.player play];
+
+    }
+    else
+    {
+        self.player.currentTime = selectedTimeStamp;
+        [self.player play];
+    }
+    
+    [self.playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+
+}
+
 /*
 #pragma mark - Navigation
 

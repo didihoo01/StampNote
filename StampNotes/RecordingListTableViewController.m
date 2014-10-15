@@ -39,7 +39,12 @@
     
     NSLog(@"At %@", self.currentAlbumFolderPath);
     
-    self.recordingList = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.currentAlbumFolderPath error:&error] mutableCopy];
+    
+    NSArray *allContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.currentAlbumFolderPath error:&error];
+    
+    self.recordingList = [[allContents filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH '.m4a'"]] mutableCopy];
+    
+    
     
     [self.tableView reloadData];
 }
@@ -72,7 +77,10 @@
         RecordingDetailViewController *newRecordingDetailViewController = [segue destinationViewController];
         NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
         newRecordingDetailViewController.recordingFilePath = [NSString stringWithFormat:@"%@/%@", self.currentAlbumFolderPath, self.recordingList[selectedIndexPath.row]];
-        NSLog(@"%@", newRecordingDetailViewController.recordingFilePath);
+        newRecordingDetailViewController.stampsFilePath = [newRecordingDetailViewController.recordingFilePath
+                                                           stringByReplacingOccurrencesOfString:@".m4a" withString:@".txt"];
+        
+        NSLog(@"We have %@ and %@",newRecordingDetailViewController.recordingFilePath, newRecordingDetailViewController.stampsFilePath);
     }
 }
 
