@@ -10,10 +10,13 @@
 #import "Recording.h"
 #import "RecordingListTableViewController.h"
 #import "AppDelegate.h"
+#import "SNTableViewCell.h"
+#import "RecordingListTableViewController.h"
 
 
 
 @interface SNMainTableViewController ()
+@property(nonatomic, strong) SNTableViewCell *myTableCell;
 
 
 
@@ -23,6 +26,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -40,10 +46,14 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+    
+    
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
     NSError *error;
     NSLog(@"Documents directory: %@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[paths objectAtIndex:0] error:&error]);
+    
     
 }
 
@@ -67,6 +77,8 @@
         NSArray *recordingList = [recordingContext executeFetchRequest:recordingsFetchRequest error: &error];
         
         self.recordings = [recordingList mutableCopy];
+        
+        NSLog(@"%@", self.recordings);
     }
     return self;
 }
@@ -75,23 +87,65 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    
     return [self.recordings count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecordingCell" forIndexPath:indexPath];
+    self.myTableCell = [tableView dequeueReusableCellWithIdentifier:@"RecordingCell" forIndexPath:indexPath];
     
-    cell.textLabel.text = [self.recordings[indexPath.row] name];
+//    [self.myTableCell.cellTextField  setDelegate:self];
     
-    return cell;
+    self.myTableCell.textLabel.text = [self.recordings[indexPath.row] name];
+
+    return self.myTableCell;
 }
 
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if ([identifier isEqualToString:@"newRecordingSession"])
+    {
+        NSError *error = nil;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+        NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
+        if (dictionary)
+        {
+            float freeSpace  = [[dictionary objectForKey: NSFileSystemFreeSize] longLongValue];
+            float totalSpace = [[dictionary objectForKey: NSFileSystemSize] longLongValue];
+            NSLog(@"Free Space: %f MB, Total Space: %f MB", freeSpace / 1048576 , totalSpace / 1048576);
+            if (freeSpace < 400)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Warning"
+                                                                message: @"Not enough space, clean up your device"
+                                                               delegate: nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                return NO;
+            }
+        }
+        
+    }
+    
+    return YES;
+    
+}
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.identifier isEqualToString:@"newRecordingSession"])
     {
+        NSError *error = nil;
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+        NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
+        if (dictionary) {
+            float freeSpace  = [[dictionary objectForKey: NSFileSystemFreeSize] longLongValue];
+            float totalSpace = [[dictionary objectForKey: NSFileSystemSize] longLongValue];
+            NSLog(@"Free Space: %f MB, Total Space: %f MB", freeSpace / 1048576 , totalSpace / 1048576);
+        }
+        
+        
         RecordingScreenViewController* newRecordingScreenViewController = [segue destinationViewController];
         newRecordingScreenViewController.delegate = self;
         
@@ -102,6 +156,9 @@
         RecordingListTableViewController *newRecordingListTableViewController = [segue destinationViewController];
         NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
         newRecordingListTableViewController.currentAlbumFolderPath = [self.recordings[selectedIndexPath.row] folderDirectory];
+        newRecordingListTableViewController.albumNameString = [self.recordings[selectedIndexPath.row] name];
+        newRecordingListTableViewController.updatedAlbumList = self.recordings;
+        
 
     }
 }
@@ -111,14 +168,14 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    NSManagedObjectContext *candyContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
+    NSManagedObjectContext *recordingContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
     
     
     [[NSFileManager defaultManager] removeItemAtPath:[self.recordings[indexPath.row] folderDirectory] error:nil];
     
     NSLog(@"Deleting %@", [self.recordings[indexPath.row] folderDirectory]);
     
-    [candyContext deleteObject: self.recordings[indexPath.row]];
+    [recordingContext deleteObject: self.recordings[indexPath.row]];
     
     [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
     
@@ -155,7 +212,7 @@
         [[NSFileManager defaultManager] createDirectoryAtPath:path
                                   withIntermediateDirectories:NO
                                                    attributes:nil
-                                                        error: nil];
+                                                        error:nil];
     }
     
     newRecording.folderDirectory = path;

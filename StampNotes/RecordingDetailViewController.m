@@ -15,6 +15,7 @@
 @property(strong, nonatomic) AVAudioPlayer *player;
 
 
+
 @end
 
 @implementation RecordingDetailViewController
@@ -41,6 +42,9 @@
     
     //it removes the termination point at the end of the string that was stored as a component
     [self.timeStamps removeLastObject];
+    
+    
+    
 }
 
 
@@ -54,7 +58,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timeStamp" forIndexPath:indexPath];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Label %d at %@ second", indexPath.row + 1, self.timeStamps[indexPath.row]];
+    cell.textLabel.text = [NSString stringWithFormat:@"Label %d at %@ second", ((int) (indexPath.row + 1)), self.timeStamps[indexPath.row]];
     
     return cell;
     
@@ -100,9 +104,9 @@
     
     NSLog(@"%f", selectedTimeStamp);
     
-    if (selectedTimeStamp > 3.0)
+    if (selectedTimeStamp > 1.5)
     {
-        self.player.currentTime = selectedTimeStamp - 3.0;
+        self.player.currentTime = selectedTimeStamp - 1.5;
         [self.player play];
 
     }

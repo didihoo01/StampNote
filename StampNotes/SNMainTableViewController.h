@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "RecordingScreenViewController.h"
+#import "RecordingListTableViewController.h"
 
 
-@interface SNMainTableViewController : UITableViewController<RecordingScreenViewControllerDelegate>
+@interface SNMainTableViewController : UITableViewController<RecordingScreenViewControllerDelegate, UITextFieldDelegate>
 
 
 

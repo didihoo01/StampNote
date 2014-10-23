@@ -89,6 +89,11 @@
     
     [self.timeMarksArray addObject:[NSString stringWithFormat:@"0.0\n"]];
 
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recordingFinished:) name:UIApplicationWillTerminateNotification object:nil];
+    
+//    [UIApplication sharedApplication].delegate = self;
     
     // Do any additional setup after loading the view.
 }
@@ -98,15 +103,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)recordingPlay:(id)sender
-{
-    if (!self.recorder.recording){
-        self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:self.recorder.url error:nil];
-        [self.player setDelegate:self];
-        [self.player play];
-    }
 
-}
 
 
 
@@ -139,11 +136,6 @@
         //start recroding
         [self.recorder record];
         [self.startRecordingButton setTitle:@"Pause" forState:UIControlStateNormal];
-        
-        
-        
-        
-        
         
     }
     
@@ -180,8 +172,7 @@
     [[NSFileManager defaultManager] createFileAtPath:self.timeMarksFilePath contents:tempDataBuffer attributes:nil];
     
     
-    
-//    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 
@@ -192,19 +183,29 @@
     [self.playRecordingButton setEnabled:YES];
 }
 
-- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Done"
-                                                    message: @"Finish playing the recording!"
-                                                   delegate: nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
-}
+
 
 
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    
+    if (self.recorder.recording)
+    {
+        [self.recorder stop];
+        [self killTimer];
+        
+        
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setActive:NO error:nil];
+        
+        
+        NSString *timeStampsInString = [[self.timeMarksArray valueForKey:@"description"] componentsJoinedByString:@""];
+        NSData* tempDataBuffer = [timeStampsInString dataUsingEncoding:NSASCIIStringEncoding];
+        
+        [[NSFileManager defaultManager] createFileAtPath:self.timeMarksFilePath contents:tempDataBuffer attributes:nil];
+    }
+    
     AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:self.recordingURL options:nil];
     CMTime audioDuration = audioAsset.duration;
     float audioDurationSeconds = CMTimeGetSeconds(audioDuration);
@@ -214,6 +215,9 @@
     {
         [[NSFileManager defaultManager] removeItemAtURL:self.recordingURL error:nil];
     }
+    
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
+
     
 }
 
@@ -247,6 +251,12 @@
 
     }
 }
+
+//- (void)applicationWillTerminate:(UIApplication *)application
+//{
+//    NSLog(@"YOLO Swag!!!");
+//}
+
 
 /*
 #pragma mark - Navigation

@@ -9,9 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "RecordingScreenViewController.h"
 
-@interface RecordingListTableViewController : UITableViewController <RecordingScreenViewControllerDelegate>
+
+
+@interface RecordingListTableViewController : UITableViewController <RecordingScreenViewControllerDelegate, UITextFieldDelegate>
 
 @property (strong, nonatomic) NSMutableArray * recordingList;
 @property (assign, nonatomic) NSString * currentAlbumFolderPath;
+@property (assign, nonatomic) NSString * albumNameString;
+@property (weak, nonatomic) IBOutlet UITextField *albumName;
+@property (strong, nonatomic) NSMutableArray *updatedAlbumList;
+
+
 
 @end
