@@ -49,16 +49,17 @@
     self.stampButtonLable = 1;
     self.previousTime = 0.0;
     
+#pragma message "Use dot syntax for these properties instead of calling setter methods"
     [self.finishedRecordingButton setEnabled:NO];
 
     
     self.timeMarksArray = [NSMutableArray new];
 
-
+#pragma message "You should access the delegate property with dot syntax instead of calling the getter method"
     self.recordingForFilePath = [[self delegate] directoryForNewRecording];
     NSDate *tempDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    
+#pragma message "Ideally you should create the date formatter as a class-level (static) variable. Initializing date formatters is pretty expensive so you want to avoid doing it more often than necessary"
     [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss-a"];
     
     NSString *tempString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:tempDate]];
@@ -72,7 +73,7 @@
     
     // Define the recorder setting
     NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
-    
+#pragma message "Use literal syntax: ‘recordSetting[AVFormatIDKey] = xyz‘"
     [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
     [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
     [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
@@ -107,6 +108,8 @@
     
     // Do any additional setup after loading the view.
 }
+
+#pragma message "Remove empty stub methods"
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -205,6 +208,7 @@
 
 }
 
+#pragma message "View Lifecycle methods should come directly after dealloc/init methods"
 
 -(void)viewWillDisappear:(BOOL)animated
 {
