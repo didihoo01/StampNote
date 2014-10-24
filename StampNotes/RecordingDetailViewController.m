@@ -63,11 +63,7 @@
     
 }
 
-#pragma message "Remove empty method stubs"
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 - (IBAction)playPauseRecording:(id)sender
 {
     if (self.player.playing)
@@ -106,7 +102,8 @@
     float selectedTimeStamp = [self.timeStamps[indexPath.row] floatValue];
     
     NSLog(@"%f", selectedTimeStamp);
-#pragma message "This if statement could use a comment"
+    
+    //Forces a playback delay to account for human reacation delay when hearing a new topic being introduced.
     if (selectedTimeStamp > 1.5)
     {
         self.player.currentTime = selectedTimeStamp - 1.5;

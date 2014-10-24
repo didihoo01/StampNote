@@ -49,17 +49,15 @@
     self.stampButtonLable = 1;
     self.previousTime = 0.0;
     
-#pragma message "Use dot syntax for these properties instead of calling setter methods"
-    [self.finishedRecordingButton setEnabled:NO];
+    self.finishedRecordingButton.enabled = NO;
 
     
     self.timeMarksArray = [NSMutableArray new];
 
-#pragma message "You should access the delegate property with dot syntax instead of calling the getter method"
-    self.recordingForFilePath = [[self delegate] directoryForNewRecording];
+    self.recordingForFilePath = [self.delegate directoryForNewRecording];
     NSDate *tempDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-#pragma message "Ideally you should create the date formatter as a class-level (static) variable. Initializing date formatters is pretty expensive so you want to avoid doing it more often than necessary"
+    
     [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss-a"];
     
     NSString *tempString = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:tempDate]];
@@ -71,12 +69,8 @@
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryRecord error:nil];
     
-    // Define the recorder setting
-    NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
-#pragma message "Use literal syntax: ‘recordSetting[AVFormatIDKey] = xyz‘"
-    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
-    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
-    [recordSetting setValue:[NSNumber numberWithInt: 2] forKey:AVNumberOfChannelsKey];
+    
+    NSDictionary  *recordSetting = @{AVFormatIDKey : @(kAudioFormatMPEG4AAC), AVSampleRateKey : @44100.0, AVNumberOfChannelsKey: @(2)} ;
     
     // Initiate and prepare the recorder
     self.recorder = [[AVAudioRecorder alloc] initWithURL:self.recordingURL settings:recordSetting error:NULL];
@@ -109,17 +103,38 @@
     // Do any additional setup after loading the view.
 }
 
-#pragma message "Remove empty stub methods"
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewWillDisappear:(BOOL)animated
+{
+    
+    if (self.recorder.recording)
+    {
+        [self.recorder stop];
+        [self killTimer];
+        
+        
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setActive:NO error:nil];
+        
+        
+        NSString *timeStampsInString = [[self.timeMarksArray valueForKey:@"description"] componentsJoinedByString:@""];
+        NSData* tempDataBuffer = [timeStampsInString dataUsingEncoding:NSASCIIStringEncoding];
+        
+        [[NSFileManager defaultManager] createFileAtPath:self.timeMarksFilePath contents:tempDataBuffer attributes:nil];
+    }
+    
+    AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:self.recordingURL options:nil];
+    CMTime audioDuration = audioAsset.duration;
+    float audioDurationSeconds = CMTimeGetSeconds(audioDuration);
+    NSLog(@"Recording is %f seconds long", audioDurationSeconds);
+    
+    if (audioDurationSeconds < 1)
+    {
+        [[NSFileManager defaultManager] removeItemAtURL:self.recordingURL error:nil];
+    }
+    
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
+    
 }
-
-
-
-
-
 
 - (IBAction)recordingStartOrPause:(id)sender
 {
@@ -208,41 +223,7 @@
 
 }
 
-#pragma message "View Lifecycle methods should come directly after dealloc/init methods"
 
--(void)viewWillDisappear:(BOOL)animated
-{
-    
-    if (self.recorder.recording)
-    {
-        [self.recorder stop];
-        [self killTimer];
-        
-        
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        [audioSession setActive:NO error:nil];
-        
-        
-        NSString *timeStampsInString = [[self.timeMarksArray valueForKey:@"description"] componentsJoinedByString:@""];
-        NSData* tempDataBuffer = [timeStampsInString dataUsingEncoding:NSASCIIStringEncoding];
-        
-        [[NSFileManager defaultManager] createFileAtPath:self.timeMarksFilePath contents:tempDataBuffer attributes:nil];
-    }
-    
-    AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:self.recordingURL options:nil];
-    CMTime audioDuration = audioAsset.duration;
-    float audioDurationSeconds = CMTimeGetSeconds(audioDuration);
-    NSLog(@"Recording is %f seconds long", audioDurationSeconds);
-    
-    if (audioDurationSeconds < 1)
-    {
-        [[NSFileManager defaultManager] removeItemAtURL:self.recordingURL error:nil];
-    }
-    
-    [UIApplication sharedApplication].idleTimerDisabled = NO;
-
-    
-}
 
 -(void)updateStampTimer
 {

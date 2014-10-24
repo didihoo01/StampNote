@@ -15,10 +15,8 @@
 
 @interface RecordingScreenViewController : UIViewController
 
-#pragma message "This should be stored 'strong'"
-@property (nonatomic, assign) NSString *recordingForFilePath;
-#pragma message "This should be stored 'weak'"
-@property (nonatomic, assign) id <RecordingScreenViewControllerDelegate> delegate;
+@property (nonatomic, strong) NSString *recordingForFilePath;
+@property (nonatomic, weak) id <RecordingScreenViewControllerDelegate> delegate;
 @property (nonatomic, assign) float stampTimer;
 
 

@@ -12,10 +12,5 @@
 
 
 @interface SNMainTableViewController : UITableViewController<RecordingScreenViewControllerDelegate, UITextFieldDelegate>
-#pragma message "Spacing! You don't need that many empty lines!"
-
-
 @property(nonatomic, strong) NSMutableArray *recordings;
-
-
 @end

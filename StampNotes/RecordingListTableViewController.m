@@ -20,15 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-
-#pragma message "SPACING!"
 }
 
-#pragma message "Remove empty methods"
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -137,7 +130,6 @@
 
 -(void)checkFilesWithSameName
 {
-#pragma message "Add comments to this method"
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSLog(@"Documents directory at: %@", [paths objectAtIndex:0]);
     NSLog(@"Checking %@ if it exists", self.albumName.text);
@@ -196,6 +188,7 @@
                 NSString * path = [[paths objectAtIndex:0] stringByAppendingPathComponent:newAlbum.name];
                 
                 newAlbum.folderDirectory = path;
+                self.currentAlbumFolderPath = path;
                 
                 [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
                 
@@ -207,6 +200,17 @@
         }
         NSLog(@"Folder renamed!");
     }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/%@", self.currentAlbumFolderPath, self.recordingList[indexPath.row]] error:nil];
+    
+    [self.recordingList removeObjectAtIndex:indexPath.row];
+    
+    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
 }
 
 

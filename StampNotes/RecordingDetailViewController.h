@@ -10,9 +10,8 @@
 
 @interface RecordingDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-#pragma message "these strings are owned by this ViewController, so 'strong' would be the right keyword to use here instead of 'assign'"
-@property (assign, nonatomic) NSString *recordingFilePath;
-@property (assign, nonatomic) NSString *stampsFilePath;
+@property (strong, nonatomic) NSString *recordingFilePath;
+@property (strong, nonatomic) NSString *stampsFilePath;
 
 @property (strong, nonatomic) NSMutableArray *timeStamps;
 
