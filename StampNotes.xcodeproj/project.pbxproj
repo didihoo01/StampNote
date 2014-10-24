@@ -22,6 +22,7 @@
 		17C5F4F619E0B01000559E97 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 17C5F4F419E0B01000559E97 /* LaunchScreen.xib */; };
 		17C5F50219E0B01000559E97 /* StampNotesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F50119E0B01000559E97 /* StampNotesTests.m */; };
 		17C5F51319E224ED00559E97 /* SNMainTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F51219E224ED00559E97 /* SNMainTableViewController.m */; };
+		17DF0E7019F9C783002EB159 /* SCSiriWaveformView.m in Sources */ = {isa = PBXBuildFile; fileRef = 17DF0E6F19F9C783002EB159 /* SCSiriWaveformView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		17C5F50119E0B01000559E97 /* StampNotesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StampNotesTests.m; sourceTree = "<group>"; };
 		17C5F51119E224ED00559E97 /* SNMainTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SNMainTableViewController.h; sourceTree = "<group>"; };
 		17C5F51219E224ED00559E97 /* SNMainTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNMainTableViewController.m; sourceTree = "<group>"; };
+		17DF0E6E19F9C783002EB159 /* SCSiriWaveformView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCSiriWaveformView.h; sourceTree = "<group>"; };
+		17DF0E6F19F9C783002EB159 /* SCSiriWaveformView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCSiriWaveformView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,7 @@
 		17C5F4D619E0B01000559E97 = {
 			isa = PBXGroup;
 			children = (
+				17DF0E6D19F9C783002EB159 /* SCSiriWaveformView */,
 				1794616819E70D68009515F5 /* Foundation.framework */,
 				1734F4CD19E467A900639716 /* AVFoundation.framework */,
 				17C5F4E119E0B01000559E97 /* StampNotes */,
@@ -153,6 +157,15 @@
 				17C5F50019E0B01000559E97 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		17DF0E6D19F9C783002EB159 /* SCSiriWaveformView */ = {
+			isa = PBXGroup;
+			children = (
+				17DF0E6E19F9C783002EB159 /* SCSiriWaveformView.h */,
+				17DF0E6F19F9C783002EB159 /* SCSiriWaveformView.m */,
+			);
+			path = SCSiriWaveformView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,6 +272,7 @@
 				1796C22D19F46C9600CD6006 /* SNTableViewCell.m in Sources */,
 				17ACE49E19EB6469001EE564 /* RecordingDetailViewController.m in Sources */,
 				1764E73819E33D43004323F4 /* Recording.m in Sources */,
+				17DF0E7019F9C783002EB159 /* SCSiriWaveformView.m in Sources */,
 				17C5F4E819E0B01000559E97 /* AppDelegate.m in Sources */,
 				17C5F4EB19E0B01000559E97 /* StampNotes.xcdatamodeld in Sources */,
 				1734F4C919E3561000639716 /* RecordingListTableViewController.m in Sources */,
@@ -322,7 +336,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (THSSLA6DMD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Benjamin Encz (THSSLA6DMD)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -342,6 +357,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "D0190417-620E-479A-82FE-5BF5C154209A";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -363,7 +379,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (THSSLA6DMD)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Benjamin Encz (THSSLA6DMD)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -376,6 +393,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "D0190417-620E-479A-82FE-5BF5C154209A";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -388,6 +406,7 @@
 				INFOPLIST_FILE = StampNotes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "D0190417-620E-479A-82FE-5BF5C154209A";
 			};
 			name = Debug;
 		};
@@ -398,6 +417,7 @@
 				INFOPLIST_FILE = StampNotes/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "D0190417-620E-479A-82FE-5BF5C154209A";
 			};
 			name = Release;
 		};
@@ -405,6 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (THSSLA6DMD)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -424,6 +445,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Benjamin Encz (THSSLA6DMD)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

@@ -9,6 +9,7 @@
 #import "RecordingScreenViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "Recording.h"
+#import "SCSiriWaveformView.h"
 #import "AppDelegate.h"
 
 
@@ -18,7 +19,6 @@
 @property(strong, nonatomic) AVAudioPlayer *player;
 @property (weak, nonatomic) IBOutlet UIButton *startRecordingButton;
 @property (weak, nonatomic) IBOutlet UIButton *finishedRecordingButton;
-@property (weak, nonatomic) IBOutlet UIButton *playRecordingButton;
 
 
 @property (strong, nonatomic) NSURL *recordingURL;
@@ -31,6 +31,7 @@
 
 @property (assign, nonatomic) float previousTime;
 
+@property (weak, nonatomic) IBOutlet SCSiriWaveformView *waveFormView;
 
 
 @end
@@ -49,7 +50,6 @@
     self.previousTime = 0.0;
     
     [self.finishedRecordingButton setEnabled:NO];
-    [self.playRecordingButton setEnabled:NO];
 
     
     self.timeMarksArray = [NSMutableArray new];
@@ -68,7 +68,7 @@
     
     // Setup audio session
     AVAudioSession *session = [AVAudioSession sharedInstance];
-    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
+    [session setCategory:AVAudioSessionCategoryRecord error:nil];
     
     // Define the recorder setting
     NSMutableDictionary *recordSetting = [[NSMutableDictionary alloc] init];
@@ -82,6 +82,16 @@
     self.recorder.delegate = self;
     self.recorder.meteringEnabled = YES;
     [self.recorder prepareToRecord];
+    
+    CADisplayLink *displaylink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateMeters)];
+    [displaylink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+    
+    
+    
+    [self.waveFormView setWaveColor:[UIColor blueColor]];
+    [self.waveFormView setPrimaryWaveLineWidth:6.0f];
+    [self.waveFormView setSecondaryWaveLineWidth:2.0];
+
     
     NSError *error;
     
@@ -135,6 +145,9 @@
         
         //start recroding
         [self.recorder record];
+        
+    
+        
         [self.startRecordingButton setTitle:@"Pause" forState:UIControlStateNormal];
         
     }
@@ -151,7 +164,6 @@
     }
     
     [self.finishedRecordingButton setEnabled:YES];
-    [self.playRecordingButton setEnabled:NO];
     
     
 }
@@ -180,11 +192,18 @@
     [self.startRecordingButton setTitle:@"Start" forState:UIControlStateNormal];
     
     [self.finishedRecordingButton setEnabled:NO];
-    [self.playRecordingButton setEnabled:YES];
 }
 
 
+- (void)updateMeters
+{
+        [self.recorder updateMeters];
+        
+        CGFloat normalizedValue = pow (10, [self.recorder averagePowerForChannel:0] / 20);
+        
+        [self.waveFormView updateWithLevel:normalizedValue];
 
+}
 
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -228,7 +247,6 @@
 
 - (IBAction)stampTime:(id)sender
 {
-    
     if (self.recorder.recording)
     {
         self.stampButtonLable = self.stampButtonLable + 1;
@@ -238,6 +256,7 @@
         
         [self.timeMarksArray addObject:[NSString stringWithFormat:@"%.2f\n", self.stampTimer]];
     }
+    
 
 }
 

@@ -44,7 +44,6 @@
     [self.timeStamps removeLastObject];
     
     
-    
 }
 
 
@@ -78,6 +77,10 @@
     }
     else
     {
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+        
+        [[AVAudioSession sharedInstance] setActive:YES error:nil];
+        
         [self.player play];
         [self.playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
     }
