@@ -14,6 +14,7 @@
 #import "RecordingListTableViewController.h"
 
 
+#pragma message "spacing"
 
 @interface SNMainTableViewController ()
 @property(nonatomic, strong) SNTableViewCell *myTableCell;
@@ -23,6 +24,8 @@
 @end
 
 @implementation SNMainTableViewController
+
+#pragma message "Remove empty method stubs"
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,6 +59,8 @@
     
     
 }
+
+#pragma message "Init method should be the first method in this class"
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     
@@ -140,6 +145,7 @@
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
         NSDictionary *dictionary = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[paths lastObject] error: &error];
         if (dictionary) {
+#pragma message "You don't need this anymore, right? You already check for free space in the other method"
             float freeSpace  = [[dictionary objectForKey: NSFileSystemFreeSize] longLongValue];
             float totalSpace = [[dictionary objectForKey: NSFileSystemSize] longLongValue];
             NSLog(@"Free Space: %f MB, Total Space: %f MB", freeSpace / 1048576 , totalSpace / 1048576);
@@ -194,7 +200,7 @@
     Recording *newRecording = [NSEntityDescription insertNewObjectForEntityForName:@"Recording" inManagedObjectContext:recordingContext];
     
     newRecording.date = [NSDate date];
-    
+    #pragma message "Ideally you should create the date formatter as a class-level (static) variable. Initializing date formatters is pretty expensive so you want to avoid doing it more often than necessary"
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
     [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss-a"];

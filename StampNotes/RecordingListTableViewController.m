@@ -22,9 +22,10 @@
     [super viewDidLoad];
 
 
-
+#pragma message "SPACING!"
 }
 
+#pragma message "Remove empty methods"
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -136,6 +137,7 @@
 
 -(void)checkFilesWithSameName
 {
+#pragma message "Add comments to this method"
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSLog(@"Documents directory at: %@", [paths objectAtIndex:0]);
     NSLog(@"Checking %@ if it exists", self.albumName.text);
