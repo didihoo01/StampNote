@@ -99,6 +99,10 @@
 {
     
     
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    [[AVAudioSession sharedInstance] setActive:YES error:nil];
+    
     float selectedTimeStamp = [self.timeStamps[indexPath.row] floatValue];
     
     NSLog(@"%f", selectedTimeStamp);
@@ -107,6 +111,8 @@
     if (selectedTimeStamp > 1.5)
     {
         self.player.currentTime = selectedTimeStamp - 1.5;
+        
+        
         [self.player play];
 
     }

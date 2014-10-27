@@ -49,7 +49,7 @@
     self.stampButtonLable = 1;
     self.previousTime = 0.0;
     
-    self.finishedRecordingButton.enabled = NO;
+//    self.finishedRecordingButton.enabled = NO;
 
     
     self.timeMarksArray = [NSMutableArray new];
@@ -76,7 +76,22 @@
     self.recorder = [[AVAudioRecorder alloc] initWithURL:self.recordingURL settings:recordSetting error:NULL];
     self.recorder.delegate = self;
     self.recorder.meteringEnabled = YES;
-    [self.recorder prepareToRecord];
+    if (!self.scheduleTimer)
+    {
+        self.stampTimer = self.previousTime;
+        self.scheduleTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateStampTimer) userInfo:nil repeats:YES];
+    }
+    
+    
+    [session setActive:YES error:nil];
+    
+    //start recroding
+    [self.recorder record];
+    
+    
+    
+    [self.startRecordingButton setTitle:@"Pause" forState:UIControlStateNormal];
+
     
     CADisplayLink *displaylink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateMeters)];
     [displaylink addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
@@ -178,7 +193,7 @@
         self.stampTimer = 0.0;
         [self killTimer];
         
-        [self.startRecordingButton setTitle:@"Start" forState:UIControlStateNormal];
+        [self.startRecordingButton setTitle:@"Resume" forState:UIControlStateNormal];
     }
     
     [self.finishedRecordingButton setEnabled:YES];

@@ -8,8 +8,12 @@
 
 #import "SNTableViewCell.h"
 
-@implementation SNTableViewCell
+@interface SNTableViewCell()
 
+@property (weak, nonatomic) IBOutlet UILabel *albumLabel;
+@end
+
+@implementation SNTableViewCell
 
 - (void)awakeFromNib {
     // Initialization code
@@ -19,6 +23,18 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+#pragma mark - Setters
+
+- (void)setAlbumName:(NSString *) albumName
+{
+    if (_albumName != albumName)
+    {
+        _albumName = [albumName copy];
+    }
+    
+    self.albumLabel.text = _albumName;
 }
 
 

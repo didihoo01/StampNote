@@ -54,8 +54,6 @@
     [super viewWillAppear:animated];
     [self.tableView reloadData];
     
-    
-    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
     NSError *error;
@@ -80,7 +78,13 @@
     
 //    [self.myTableCell.cellTextField  setDelegate:self];
     
-    self.myTableCell.textLabel.text = [self.recordings[indexPath.row] name];
+    
+    self.myTableCell.textLabel.font = [UIFont systemFontOfSize:30];
+    
+    self.myTableCell.backgroundColor = [self colorForCellAtIndexPath:indexPath];
+
+    
+    [self.myTableCell setAlbumName: [self.recordings[indexPath.row] name] ];
 
     return self.myTableCell;
 }
@@ -153,11 +157,10 @@
     
     [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
     
-
-    
     [self.recordings removeObjectAtIndex:indexPath.row];
     
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    
     
 }
 
@@ -200,6 +203,30 @@
     return newRecording.folderDirectory;
 }
 
+- (UIColor*)colorForCellAtIndexPath:(NSIndexPath*)indexPath
+{
+    NSInteger row = indexPath.row;
+    
+    UIColor* color;
+    
+    switch (row % 10)
+    {
+        case 0: color = [UIColor colorWithRed:52/255.0f green:152/255.0f blue:219/255.0f alpha:1.0f]; break;
+        case 1: color = [UIColor colorWithRed:46/255.0f green:204/255.0f blue:113/255.0f alpha:1.0f]; break;
+        case 2: color = [UIColor colorWithRed:52/255.0f green:73/255.0f blue:94/255.0f alpha:1.0f]; break;
+        case 3: color = [UIColor colorWithRed:155/255.0f green:89/255.0f blue:182/255.0f alpha:1.0f]; break;
+        case 4: color = [UIColor colorWithRed:26/255.0f green:188/255.0f blue:156/255.0f alpha:1.0f]; break;
+        case 5: color = [UIColor colorWithRed:241/255.0f green:196/255.0f blue:15/255.0f alpha:1.0f]; break;
+        case 6: color = [UIColor colorWithRed:230/255.0f green:126/255.0f blue:34/255.0f alpha:1.0f]; break;
+        case 7: color = [UIColor colorWithRed:231/255.0f green:76/255.0f blue:60/255.0f alpha:1.0f]; break;
+        case 8: color = [UIColor colorWithRed:236/255.0f green:240/255.0f blue:241/255.0f alpha:1.0f]; break;
+        case 9: color = [UIColor colorWithRed:149/255.0f green:165/255.0f blue:166/255.0f alpha:1.0f]; break;
+
+
+    }
+    
+    return color;
+}
 
 
 @end

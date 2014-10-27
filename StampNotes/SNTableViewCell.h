@@ -10,8 +10,8 @@
 
 @interface SNTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UITextField *cellTextField;
 
+@property (nonatomic, copy) NSString* albumName;
 
 
 @end
