@@ -136,6 +136,7 @@
         newRecordingListTableViewController.currentAlbumFolderPath = [self.recordings[selectedIndexPath.row] folderDirectory];
         newRecordingListTableViewController.albumNameString = [self.recordings[selectedIndexPath.row] name];
         newRecordingListTableViewController.updatedAlbumList = self.recordings;
+#pragma message "You should use your helper method 'colorForRow...' instead of accessing the background color of the cell -> easier to change cells in future, etc."
         newRecordingListTableViewController.recordingColor = [self.tableView cellForRowAtIndexPath:selectedIndexPath].backgroundColor;
         
 
@@ -173,6 +174,7 @@
     
     newRecording.date = [NSDate date];
 
+#pragma message "I think I mentioned this in last code review? It would be better to create this dateformatter once and storing it in a static variable; it's quite expensive to create new formatters"
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
     [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss-a"];

@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
 @property(strong, nonatomic) AVAudioPlayer *player;
 @property(strong, nonatomic) SNTimeStampTableViewCell *cell;
-
+#pragma message "weird property name; can you think of something better? :> Makes it sound like a BOOL variable"
 @property(assign, nonatomic) int forwardOrBackWardTimer;
 
 
@@ -66,7 +66,7 @@
 {
     
     self.cell = [tableView dequeueReusableCellWithIdentifier:@"timeStamp" forIndexPath:indexPath];
-    
+#pragma message "use the dot-syntax instead of calling the setter directly"
     [self.cell setTimeStampLabelName: [NSString stringWithFormat:@"%d", ((int) (indexPath.row + 1))]];
     
     self.cell.timeStampLabel.backgroundColor = self.timeStampColor;

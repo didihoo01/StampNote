@@ -27,7 +27,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+#pragma message "Use property syntax!"
     [self.tableView setBackgroundColor:self.recordingColor];
     
     self.recordingList = [NSMutableArray new];
@@ -60,6 +60,7 @@
     SNTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecordingDetailView" forIndexPath:indexPath];
     
     cell.backgroundColor = self.recordingColor;
+#pragma message "Use property syntax!"
     [cell setLabelName: self.recordingList[indexPath.row]];
     
     return cell;
