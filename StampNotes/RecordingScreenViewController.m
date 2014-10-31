@@ -19,6 +19,7 @@
 @property(strong, nonatomic) AVAudioPlayer *player;
 @property (weak, nonatomic) IBOutlet UIButton *startRecordingButton;
 @property (weak, nonatomic) IBOutlet UIButton *finishedRecordingButton;
+@property (weak, nonatomic) IBOutlet UISwitch *saveRecordingSwitch;
 
 
 @property (strong, nonatomic) NSURL *recordingURL;
@@ -44,12 +45,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.saveRecordingSwitch setOn:NO];
+    
     self.scheduleTimer = nil;
     self.stampTimer = 0.0;
     self.stampButtonLable = 1;
     self.previousTime = 0.0;
     
 //    self.finishedRecordingButton.enabled = NO;
+
+    self.navigationItem.hidesBackButton = YES;
 
     
     self.timeMarksArray = [NSMutableArray new];
@@ -112,6 +117,10 @@
     [UIApplication sharedApplication].idleTimerDisabled = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recordingFinished:) name:UIApplicationWillTerminateNotification object:nil];
+    
+    
+    [self.saveRecordingSwitch addTarget:self
+                      action:@selector(stateChanged:) forControlEvents:UIControlEventValueChanged];
     
 //    [UIApplication sharedApplication].delegate = self;
     
@@ -268,6 +277,28 @@
         [self.scheduleTimer invalidate];
         self.scheduleTimer = nil;
 
+    }
+}
+
+- (void)stateChanged:(UISwitch *)switchState
+{
+    if ([switchState isOn])
+    {
+        [self.recorder stop];
+        [self killTimer];
+        
+        
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setActive:NO error:nil];
+        
+        
+        NSString *timeStampsInString = [[self.timeMarksArray valueForKey:@"description"] componentsJoinedByString:@""];
+        NSData* tempDataBuffer = [timeStampsInString dataUsingEncoding:NSASCIIStringEncoding];
+        
+        [[NSFileManager defaultManager] createFileAtPath:self.timeMarksFilePath contents:tempDataBuffer attributes:nil];
+        
+        
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

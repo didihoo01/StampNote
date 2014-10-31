@@ -10,6 +10,7 @@
 #import "Recording.h"
 #import "AppDelegate.h"
 #import "RecordingDetailViewController.h"
+#import "SNTableViewCell.h"
 
 @interface RecordingListTableViewController ()
 
@@ -27,6 +28,8 @@
 {
     [super viewWillAppear:animated];
 
+    [self.tableView setBackgroundColor:self.recordingColor];
+    
     self.recordingList = [NSMutableArray new];
     
     NSError *error;
@@ -54,9 +57,10 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecordingDetailView" forIndexPath:indexPath];
+    SNTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecordingDetailView" forIndexPath:indexPath];
     
-    cell.textLabel.text = self.recordingList[indexPath.row];
+    cell.backgroundColor = self.recordingColor;
+    [cell setLabelName: self.recordingList[indexPath.row]];
     
     return cell;
 }
@@ -76,6 +80,7 @@
         newRecordingDetailViewController.recordingFilePath = [NSString stringWithFormat:@"%@/%@", self.currentAlbumFolderPath, self.recordingList[selectedIndexPath.row]];
         newRecordingDetailViewController.stampsFilePath = [newRecordingDetailViewController.recordingFilePath
                                                            stringByReplacingOccurrencesOfString:@".m4a" withString:@".txt"];
+        newRecordingDetailViewController.timeStampColor = self.recordingColor;
         
         NSLog(@"We have %@ and %@",newRecordingDetailViewController.recordingFilePath, newRecordingDetailViewController.stampsFilePath);
     }
@@ -212,6 +217,7 @@
     [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     
 }
+
 
 
 @end

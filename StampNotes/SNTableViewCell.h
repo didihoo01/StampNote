@@ -11,7 +11,7 @@
 @interface SNTableViewCell : UITableViewCell
 
 
-@property (nonatomic, copy) NSString* albumName;
+@property (nonatomic, copy) NSString* labelName;
 
 
 @end

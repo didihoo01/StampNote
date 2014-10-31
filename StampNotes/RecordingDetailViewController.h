@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RecordingDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface RecordingDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (strong, nonatomic) NSString *recordingFilePath;
 @property (strong, nonatomic) NSString *stampsFilePath;
 
 @property (strong, nonatomic) NSMutableArray *timeStamps;
+@property (strong, nonatomic) UIColor *timeStampColor;
+
 
 @end

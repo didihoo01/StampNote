@@ -8,11 +8,15 @@
 
 #import "RecordingDetailViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import "SNTimeStampTableViewCell.h"
 
 
 @interface RecordingDetailViewController () <AVAudioPlayerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
 @property(strong, nonatomic) AVAudioPlayer *player;
+@property(strong, nonatomic) SNTimeStampTableViewCell *cell;
+
+@property(assign, nonatomic) int forwardOrBackWardTimer;
 
 
 
@@ -26,6 +30,9 @@
 {
     [super viewDidLoad];
     
+    
+    //default timer for playing backward or forward set to 3 second;
+    self.forwardOrBackWardTimer = 3;
     NSURL *recordingURL = [NSURL fileURLWithPath:self.recordingFilePath];
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:recordingURL error:nil];
     [self.player setDelegate:self];
@@ -43,6 +50,9 @@
     //it removes the termination point at the end of the string that was stored as a component
     [self.timeStamps removeLastObject];
     
+    UIImage *playImage = [UIImage imageNamed:@"play-100.png"];
+    [self.playPauseButton setImage:playImage forState:UIControlStateNormal];
+    
     
 }
 
@@ -55,11 +65,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"timeStamp" forIndexPath:indexPath];
+    self.cell = [tableView dequeueReusableCellWithIdentifier:@"timeStamp" forIndexPath:indexPath];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Label %d at %@ second", ((int) (indexPath.row + 1)), self.timeStamps[indexPath.row]];
+    [self.cell setTimeStampLabelName: [NSString stringWithFormat:@"%d", ((int) (indexPath.row + 1))]];
     
-    return cell;
+    self.cell.timeStampLabel.backgroundColor = self.timeStampColor;
+    
+    return self.cell;
     
 }
 
@@ -69,7 +81,12 @@
     if (self.player.playing)
     {
         [self.player pause];
-        [self.playPauseButton setTitle:@"Play" forState:UIControlStateNormal];
+//        [self.playPauseButton setTitle:@"Play" forState:UIControlStateNormal];
+        
+        UIImage *playImage = [UIImage imageNamed:@"play-100.png"];
+        [self.playPauseButton setImage:playImage forState:UIControlStateNormal];
+        
+
     }
     else
     {
@@ -78,7 +95,10 @@
         [[AVAudioSession sharedInstance] setActive:YES error:nil];
         
         [self.player play];
-        [self.playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+//        [self.playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+        
+        UIImage *pauseImage = [UIImage imageNamed:@"pause-100.png"];
+        [self.playPauseButton setImage:pauseImage forState:UIControlStateNormal];
     }
     
 }
@@ -91,7 +111,9 @@
                                           otherButtonTitles:nil];
     [alert show];
     
-    [self.playPauseButton setTitle:@"Play" forState:UIControlStateNormal];
+//    [self.playPauseButton setTitle:@"Play" forState:UIControlStateNormal];
+    UIImage *playImage = [UIImage imageNamed:@"play-100.png"];
+    [self.playPauseButton setImage:playImage forState:UIControlStateNormal];
 }
 
 
@@ -105,12 +127,14 @@
     
     float selectedTimeStamp = [self.timeStamps[indexPath.row] floatValue];
     
+    NSLog(@"row %d selected", ((int) indexPath.row));
+    
     NSLog(@"%f", selectedTimeStamp);
     
     //Forces a playback delay to account for human reacation delay when hearing a new topic being introduced.
-    if (selectedTimeStamp > 1.5)
+    if (selectedTimeStamp > 2)
     {
-        self.player.currentTime = selectedTimeStamp - 1.5;
+        self.player.currentTime = selectedTimeStamp - 2;
         
         
         [self.player play];
@@ -122,9 +146,27 @@
         [self.player play];
     }
     
-    [self.playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+//    [self.playPauseButton setTitle:@"Pause" forState:UIControlStateNormal];
+    
+    UIImage *pauseImage = [UIImage imageNamed:@"pause-100.png"];
+    [self.playPauseButton setImage:pauseImage forState:UIControlStateNormal];
 
 }
+- (IBAction)backward:(id)sender {
+    
+    self.player.currentTime = self.player.currentTime - self.forwardOrBackWardTimer;
+
+}
+
+
+
+- (IBAction)forward:(id)sender {
+    self.player.currentTime = self.player.currentTime + self.forwardOrBackWardTimer;
+
+}
+
+
+
 
 /*
 #pragma mark - Navigation

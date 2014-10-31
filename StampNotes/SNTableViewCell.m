@@ -10,7 +10,8 @@
 
 @interface SNTableViewCell()
 
-@property (weak, nonatomic) IBOutlet UILabel *albumLabel;
+@property (weak, nonatomic) IBOutlet UILabel *label;
+
 @end
 
 @implementation SNTableViewCell
@@ -27,15 +28,18 @@
 
 #pragma mark - Setters
 
-- (void)setAlbumName:(NSString *) albumName
+- (void)setLabelName:(NSString *) labelName
 {
-    if (_albumName != albumName)
+    if (_labelName != labelName)
     {
-        _albumName = [albumName copy];
+        _labelName = [labelName copy];
     }
     
-    self.albumLabel.text = _albumName;
+    self.label.text = _labelName;
 }
+
+
+
 
 
 @end

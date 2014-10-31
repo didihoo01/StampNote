@@ -84,7 +84,7 @@
     self.myTableCell.backgroundColor = [self colorForCellAtIndexPath:indexPath];
 
     
-    [self.myTableCell setAlbumName: [self.recordings[indexPath.row] name] ];
+    [self.myTableCell setLabelName:[self.recordings[indexPath.row] name]];
 
     return self.myTableCell;
 }
@@ -136,6 +136,7 @@
         newRecordingListTableViewController.currentAlbumFolderPath = [self.recordings[selectedIndexPath.row] folderDirectory];
         newRecordingListTableViewController.albumNameString = [self.recordings[selectedIndexPath.row] name];
         newRecordingListTableViewController.updatedAlbumList = self.recordings;
+        newRecordingListTableViewController.recordingColor = [self.tableView cellForRowAtIndexPath:selectedIndexPath].backgroundColor;
         
 
     }
@@ -176,7 +177,7 @@
     
     [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss-a"];
     
-    newRecording.name = [NSString stringWithFormat:@"Album_%@", [dateFormatter stringFromDate:newRecording.date]];
+    newRecording.name = [NSString stringWithFormat:@"Session_%@", [dateFormatter stringFromDate:newRecording.date]];
     
     
     
