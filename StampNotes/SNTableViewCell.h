@@ -12,6 +12,9 @@
 
 
 @property (nonatomic, copy) NSString* labelName;
+@property (nonatomic, copy) NSString* timeLabelName;
+@property (nonatomic, copy) NSString* itemLabelName;
+
 
 
 @end

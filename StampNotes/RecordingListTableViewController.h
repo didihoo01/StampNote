@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *albumName;
 @property (strong, nonatomic) NSMutableArray *updatedAlbumList;
 @property (strong, nonatomic) UIColor *recordingColor;
+@property (strong, nonatomic) NSString *albumTextFieldLable;
 
 
 @end

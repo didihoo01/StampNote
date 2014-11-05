@@ -28,6 +28,9 @@
 {
     [super viewWillAppear:animated];
 
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
+    
     [self.tableView setBackgroundColor:self.recordingColor];
     
     self.recordingList = [NSMutableArray new];
@@ -45,7 +48,7 @@
             
     [self.tableView reloadData];
     
-    self.albumName.text = self.albumNameString;
+    self.albumName.text = self.albumTextFieldLable;
 
 }
 
@@ -186,6 +189,7 @@
                 [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
                 
                 newAlbum.name = self.albumName.text;
+                newAlbum.nameLable = self.albumName.text;
                 NSLog(@"new album Name %@", newAlbum.name);
                 
                 NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

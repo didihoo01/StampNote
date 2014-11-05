@@ -52,6 +52,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+//    self.tableView
     [self.tableView reloadData];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -79,12 +81,28 @@
 //    [self.myTableCell.cellTextField  setDelegate:self];
     
     
-    self.myTableCell.textLabel.font = [UIFont systemFontOfSize:30];
+    self.myTableCell.textLabel.font = [UIFont systemFontOfSize:15];
     
     self.myTableCell.backgroundColor = [self colorForCellAtIndexPath:indexPath];
 
+    [self.myTableCell setLabelName:[self.recordings[indexPath.row] nameLable]];
     
-    [self.myTableCell setLabelName:[self.recordings[indexPath.row] name]];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+
+    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+    
+    NSString *tempMDYString = [dateFormatter stringFromDate:[self.recordings[indexPath.row] date]];
+    
+    [dateFormatter setDateFormat:@"hh:mma"];
+
+    NSString *tempHMString = [dateFormatter stringFromDate:[self.recordings[indexPath.row] date]];
+    
+    [self.myTableCell setTimeLabelName:[NSString stringWithFormat:@"%@ at %@", tempMDYString, tempHMString]];
+    
+    NSArray *directoryContent  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self.recordings[indexPath.row] folderDirectory] error:nil];
+
+    [self.myTableCell setItemLabelName:[NSString stringWithFormat:@"%d", [directoryContent count] / 2]];
+
 
     return self.myTableCell;
 }
@@ -135,6 +153,7 @@
         NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
         newRecordingListTableViewController.currentAlbumFolderPath = [self.recordings[selectedIndexPath.row] folderDirectory];
         newRecordingListTableViewController.albumNameString = [self.recordings[selectedIndexPath.row] name];
+        newRecordingListTableViewController.albumTextFieldLable = [self.recordings[selectedIndexPath.row] nameLable];
         newRecordingListTableViewController.updatedAlbumList = self.recordings;
         newRecordingListTableViewController.recordingColor = [self.tableView cellForRowAtIndexPath:selectedIndexPath].backgroundColor;
         
@@ -175,10 +194,17 @@
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
+    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    [dateFormatter setLocale:usLocale];
+    
+    
     [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss-a"];
     
     newRecording.name = [NSString stringWithFormat:@"Session_%@", [dateFormatter stringFromDate:newRecording.date]];
     
+
+    newRecording.nameLable = @"Untitled";
+
     
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

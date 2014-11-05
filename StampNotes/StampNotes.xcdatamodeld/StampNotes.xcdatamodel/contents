@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13F34" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Recording" representedClassName="Recording" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="folderDirectory" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nameLable" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Recording" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Recording" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

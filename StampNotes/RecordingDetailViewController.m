@@ -33,6 +33,9 @@
     
     //default timer for playing backward or forward set to 3 second;
     self.forwardOrBackWardTimer = 3;
+    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+
     NSURL *recordingURL = [NSURL fileURLWithPath:self.recordingFilePath];
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:recordingURL error:nil];
     [self.player setDelegate:self];
