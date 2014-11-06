@@ -27,11 +27,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
-    
-    [self.tableView setBackgroundColor:self.recordingColor];
+    self.tableView.backgroundColor = self.recordingColor;
     
     self.recordingList = [NSMutableArray new];
     
@@ -63,7 +61,8 @@
     SNTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecordingDetailView" forIndexPath:indexPath];
     
     cell.backgroundColor = self.recordingColor;
-    [cell setLabelName: self.recordingList[indexPath.row]];
+    
+    cell.labelName = self.recordingList[indexPath.row];
     
     return cell;
 }

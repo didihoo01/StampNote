@@ -15,8 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *playPauseButton;
 @property(strong, nonatomic) AVAudioPlayer *player;
 @property(strong, nonatomic) SNTimeStampTableViewCell *cell;
-
-@property(assign, nonatomic) int forwardOrBackWardTimer;
+@property(assign, nonatomic) int forwardBackWardTimer;
 
 
 
@@ -32,7 +31,7 @@
     
     
     //default timer for playing backward or forward set to 3 second;
-    self.forwardOrBackWardTimer = 3;
+    self.forwardBackWardTimer = 3;
     
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
@@ -69,8 +68,7 @@
 {
     
     self.cell = [tableView dequeueReusableCellWithIdentifier:@"timeStamp" forIndexPath:indexPath];
-    
-    [self.cell setTimeStampLabelName: [NSString stringWithFormat:@"%d", ((int) (indexPath.row + 1))]];
+    self.cell.timeStampLabelName = [NSString stringWithFormat:@"%d", ((int) (indexPath.row + 1))];
     
     self.cell.timeStampLabel.backgroundColor = self.timeStampColor;
     
@@ -157,14 +155,14 @@
 }
 - (IBAction)backward:(id)sender {
     
-    self.player.currentTime = self.player.currentTime - self.forwardOrBackWardTimer;
+    self.player.currentTime = self.player.currentTime - self.forwardBackWardTimer;
 
 }
 
 
 
 - (IBAction)forward:(id)sender {
-    self.player.currentTime = self.player.currentTime + self.forwardOrBackWardTimer;
+    self.player.currentTime = self.player.currentTime + self.forwardBackWardTimer;
 
 }
 
