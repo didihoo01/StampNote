@@ -15,6 +15,7 @@
 
 @interface SNMainTableViewController ()
 @property(nonatomic, strong) SNTableViewCell *myTableCell;
+@property (strong, nonatomic) NSIndexPath *indexPathToBeDeleted;
 
 
 
@@ -43,7 +44,7 @@
         
         self.recordings = [recordingList mutableCopy];
         
-        NSLog(@"%@", self.recordings);
+//        NSLog(@"%@", self.recordings);
     }
     return self;
 }
@@ -55,12 +56,26 @@
     
 //    self.tableView
     [self.tableView reloadData];
-    
+
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     
     NSError *error;
-    NSLog(@"Documents directory: %@", [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[paths objectAtIndex:0] error:&error]);
+    NSArray * allFolders = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[paths objectAtIndex:0] error:&error];
     
+    NSArray *filteredNoteFolders = [allFolders filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self BEGINSWITH 'Session'"]];
+    
+    
+    for (int i = 0; i < [filteredNoteFolders count]; i++)
+    {
+        for (int ii = 0;  ii < [self.recordings count]; ii++)
+        {
+            //if a file in the document folder is not equal to any of the folders in coredata, it means the user just imported a new note folder via itunes, it could happen when a user restores their note or shares their note with others
+            if (![[self.recordings[ii] name] isEqualToString:filteredNoteFolders[i]])
+            {
+                ;
+            }
+        }
+    }
     
 }
 
@@ -83,7 +98,7 @@
     
     self.myTableCell.textLabel.font = [UIFont systemFontOfSize:15];
     
-    self.myTableCell.backgroundColor = [self colorForCellAtIndexPath:indexPath];
+//    self.myTableCell.backgroundColor = [self colorForCellAtIndexPath:indexPath];
 
     [self.myTableCell setLabelName:[self.recordings[indexPath.row] nameLable]];
     
@@ -101,7 +116,7 @@
     
     NSArray *directoryContent  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self.recordings[indexPath.row] folderDirectory] error:nil];
 
-    [self.myTableCell setItemLabelName:[NSString stringWithFormat:@"%d", [directoryContent count] / 2]];
+    [self.myTableCell setItemLabelName:[NSString stringWithFormat:@"%d", (int)[directoryContent count] / 2]];
 
 
     return self.myTableCell;
@@ -155,7 +170,7 @@
         newRecordingListTableViewController.albumNameString = [self.recordings[selectedIndexPath.row] name];
         newRecordingListTableViewController.albumTextFieldLable = [self.recordings[selectedIndexPath.row] nameLable];
         newRecordingListTableViewController.updatedAlbumList = self.recordings;
-        newRecordingListTableViewController.recordingColor = [self.tableView cellForRowAtIndexPath:selectedIndexPath].backgroundColor;
+//        newRecordingListTableViewController.recordingColor = [self.tableView cellForRowAtIndexPath:selectedIndexPath].backgroundColor;
         
 
     }
@@ -165,22 +180,18 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+    self.indexPathToBeDeleted = indexPath;
     
-    NSManagedObjectContext *recordingContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                    message:@"Are you sure?"
+                                                   delegate:self
+                                          cancelButtonTitle:@"NO"
+                                          otherButtonTitles:@"YES", nil];
+    [alert show];
     
-    
-    [[NSFileManager defaultManager] removeItemAtPath:[self.recordings[indexPath.row] folderDirectory] error:nil];
-    
-    NSLog(@"Deleting %@", [self.recordings[indexPath.row] folderDirectory]);
-    
-    [recordingContext deleteObject: self.recordings[indexPath.row]];
-    
-    [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
-    
-    [self.recordings removeObjectAtIndex:indexPath.row];
-    
-    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    
+    }
     
 }
 
@@ -194,16 +205,15 @@
 
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     
-    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-    [dateFormatter setLocale:usLocale];
+//    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+//    [dateFormatter setLocale:usLocale];
     
     
     [dateFormatter setDateFormat:@"yyyy-MM-dd-hh-mm-ss-a"];
     
     newRecording.name = [NSString stringWithFormat:@"Session_%@", [dateFormatter stringFromDate:newRecording.date]];
-    
 
-    newRecording.nameLable = @"Untitled";
+    newRecording.nameLable = @"Untitled Folder";
 
     
     
@@ -230,29 +240,32 @@
     return newRecording.folderDirectory;
 }
 
-- (UIColor*)colorForCellAtIndexPath:(NSIndexPath*)indexPath
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSInteger row = indexPath.row;
-    
-    UIColor* color;
-    
-    switch (row % 10)
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:@"NO"])
     {
-        case 0: color = [UIColor colorWithRed:52/255.0f green:152/255.0f blue:219/255.0f alpha:1.0f]; break;
-        case 1: color = [UIColor colorWithRed:46/255.0f green:204/255.0f blue:113/255.0f alpha:1.0f]; break;
-        case 2: color = [UIColor colorWithRed:52/255.0f green:73/255.0f blue:94/255.0f alpha:1.0f]; break;
-        case 3: color = [UIColor colorWithRed:155/255.0f green:89/255.0f blue:182/255.0f alpha:1.0f]; break;
-        case 4: color = [UIColor colorWithRed:26/255.0f green:188/255.0f blue:156/255.0f alpha:1.0f]; break;
-        case 5: color = [UIColor colorWithRed:241/255.0f green:196/255.0f blue:15/255.0f alpha:1.0f]; break;
-        case 6: color = [UIColor colorWithRed:230/255.0f green:126/255.0f blue:34/255.0f alpha:1.0f]; break;
-        case 7: color = [UIColor colorWithRed:231/255.0f green:76/255.0f blue:60/255.0f alpha:1.0f]; break;
-        case 8: color = [UIColor colorWithRed:236/255.0f green:240/255.0f blue:241/255.0f alpha:1.0f]; break;
-        case 9: color = [UIColor colorWithRed:149/255.0f green:165/255.0f blue:166/255.0f alpha:1.0f]; break;
-
-
+        NSLog(@"Nothing to do here");
     }
-    
-    return color;
+    else if([title isEqualToString:@"YES"])
+    {
+        NSLog(@"Delete the FOLDER");
+        
+        NSManagedObjectContext *recordingContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
+        
+        
+        [[NSFileManager defaultManager] removeItemAtPath:[self.recordings[self.indexPathToBeDeleted.row] folderDirectory] error:nil];
+        
+        NSLog(@"Deleting %@", [self.recordings[self.indexPathToBeDeleted.row] folderDirectory]);
+        
+        [recordingContext deleteObject: self.recordings[self.indexPathToBeDeleted.row]];
+        
+        [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
+        
+        [self.recordings removeObjectAtIndex:self.indexPathToBeDeleted.row];
+        
+        [self.tableView deleteRowsAtIndexPaths:@[self.indexPathToBeDeleted] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 

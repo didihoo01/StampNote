@@ -18,8 +18,6 @@
 @property(strong, nonatomic) AVAudioRecorder *recorder;
 @property(strong, nonatomic) AVAudioPlayer *player;
 @property (weak, nonatomic) IBOutlet UIButton *startRecordingButton;
-@property (weak, nonatomic) IBOutlet UIButton *finishedRecordingButton;
-@property (weak, nonatomic) IBOutlet UISwitch *saveRecordingSwitch;
 
 
 @property (strong, nonatomic) NSURL *recordingURL;
@@ -34,6 +32,7 @@
 
 @property (weak, nonatomic) IBOutlet SCSiriWaveformView *waveFormView;
 
+@property (weak, nonatomic) IBOutlet UILabel *stampNumberLabel;
 
 @end
 
@@ -45,8 +44,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.saveRecordingSwitch setOn:NO];
-    
+    self.navigationController.navigationBarHidden = YES;
     self.scheduleTimer = nil;
     self.stampTimer = 0.0;
     self.stampButtonLable = 1;
@@ -119,8 +117,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(recordingFinished:) name:UIApplicationWillTerminateNotification object:nil];
     
     
-    [self.saveRecordingSwitch addTarget:self
-                      action:@selector(stateChanged:) forControlEvents:UIControlEventValueChanged];
+
     
 //    [UIApplication sharedApplication].delegate = self;
     
@@ -129,6 +126,9 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    
+    self.navigationController.navigationBarHidden = NO;
+
     
     if (self.recorder.recording)
     {
@@ -205,36 +205,24 @@
         [self.startRecordingButton setTitle:@"Resume" forState:UIControlStateNormal];
     }
     
-    [self.finishedRecordingButton setEnabled:YES];
     
     
 }
 
 - (IBAction)recordingFinished:(id)sender
 {
-    [self.recorder stop];
-    [self killTimer];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done Recording?"
+                                                    message:@""
+                                                   delegate:self
+                                          cancelButtonTitle:@"NO"
+                                          otherButtonTitles:@"YES", nil];
+    [alert show];
     
     
-    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-    [audioSession setActive:NO error:nil];
-    
-    
-    NSString *timeStampsInString = [[self.timeMarksArray valueForKey:@"description"] componentsJoinedByString:@""];
-    NSData* tempDataBuffer = [timeStampsInString dataUsingEncoding:NSASCIIStringEncoding];
-    
-    [[NSFileManager defaultManager] createFileAtPath:self.timeMarksFilePath contents:tempDataBuffer attributes:nil];
-    
-    
-    [self.navigationController popViewControllerAnimated:YES];
 
 }
 
-- (void) audioRecorderDidFinishRecording:(AVAudioRecorder *)avrecorder successfully:(BOOL)flag{
-    [self.startRecordingButton setTitle:@"Start" forState:UIControlStateNormal];
-    
-    [self.finishedRecordingButton setEnabled:NO];
-}
 
 
 - (void)updateMeters
@@ -259,8 +247,7 @@
     if (self.recorder.recording)
     {
         self.stampButtonLable = self.stampButtonLable + 1;
-        [self.stampButton setTitle:[NSString stringWithFormat:@"%d", self.stampButtonLable] forState:UIControlStateNormal];
-        
+        self.stampNumberLabel.text = [NSString stringWithFormat:@"%d", self.stampButtonLable];
         NSLog(@"%.2f", self.stampTimer);
         
         [self.timeMarksArray addObject:[NSString stringWithFormat:@"%.2f\n", self.stampTimer]];
@@ -280,27 +267,27 @@
     }
 }
 
-- (void)stateChanged:(UISwitch *)switchState
-{
-    if ([switchState isOn])
-    {
-        [self.recorder stop];
-        [self killTimer];
-        
-        
-        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
-        [audioSession setActive:NO error:nil];
-        
-        
-        NSString *timeStampsInString = [[self.timeMarksArray valueForKey:@"description"] componentsJoinedByString:@""];
-        NSData* tempDataBuffer = [timeStampsInString dataUsingEncoding:NSASCIIStringEncoding];
-        
-        [[NSFileManager defaultManager] createFileAtPath:self.timeMarksFilePath contents:tempDataBuffer attributes:nil];
-        
-        
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
+//- (void)stateChanged:(UISwitch *)switchState
+//{
+//    if ([switchState isOn])
+//    {
+//        [self.recorder stop];
+//        [self killTimer];
+//        
+//        
+//        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+//        [audioSession setActive:NO error:nil];
+//        
+//        
+//        NSString *timeStampsInString = [[self.timeMarksArray valueForKey:@"description"] componentsJoinedByString:@""];
+//        NSData* tempDataBuffer = [timeStampsInString dataUsingEncoding:NSASCIIStringEncoding];
+//        
+//        [[NSFileManager defaultManager] createFileAtPath:self.timeMarksFilePath contents:tempDataBuffer attributes:nil];
+//        
+//        
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+//}
 
 //- (void)applicationWillTerminate:(UIApplication *)application
 //{
@@ -317,5 +304,31 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:@"NO"])
+    {
+        NSLog(@"Nothing to do here");
+    }
+    else if([title isEqualToString:@"YES"])
+    {
+        [self.recorder stop];
+        [self killTimer];
+        
+        
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        [audioSession setActive:NO error:nil];
+        
+        
+        NSString *timeStampsInString = [[self.timeMarksArray valueForKey:@"description"] componentsJoinedByString:@""];
+        NSData* tempDataBuffer = [timeStampsInString dataUsingEncoding:NSASCIIStringEncoding];
+        
+        [[NSFileManager defaultManager] createFileAtPath:self.timeMarksFilePath contents:tempDataBuffer attributes:nil];
+        
+        
+        [self.navigationController popViewControllerAnimated:YES];    }
+}
 
 @end

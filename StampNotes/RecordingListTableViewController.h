@@ -11,7 +11,7 @@
 
 
 
-@interface RecordingListTableViewController : UITableViewController <RecordingScreenViewControllerDelegate, UITextFieldDelegate>
+@interface RecordingListTableViewController : UITableViewController <RecordingScreenViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray * recordingList;
 @property (strong, nonatomic) NSString * currentAlbumFolderPath;

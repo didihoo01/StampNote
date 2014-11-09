@@ -13,6 +13,7 @@
 @interface Recording : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
+
 @property (nonatomic, retain) NSString * nameLable;
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * folderDirectory;

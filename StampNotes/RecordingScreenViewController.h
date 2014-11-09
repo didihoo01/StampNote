@@ -13,7 +13,7 @@
 
 @end
 
-@interface RecordingScreenViewController : UIViewController
+@interface RecordingScreenViewController : UIViewController <UIAlertViewDelegate>
 
 @property (nonatomic, strong) NSString *recordingForFilePath;
 @property (nonatomic, weak) id <RecordingScreenViewControllerDelegate> delegate;

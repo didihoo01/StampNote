@@ -11,6 +11,6 @@
 #import "RecordingListTableViewController.h"
 
 
-@interface SNMainTableViewController : UITableViewController<RecordingScreenViewControllerDelegate, UITextFieldDelegate>
+@interface SNMainTableViewController : UITableViewController<RecordingScreenViewControllerDelegate, UITextFieldDelegate, UIAlertViewDelegate>
 @property(nonatomic, strong) NSMutableArray *recordings;
 @end

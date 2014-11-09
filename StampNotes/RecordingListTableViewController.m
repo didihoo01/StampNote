@@ -13,6 +13,7 @@
 #import "SNTableViewCell.h"
 
 @interface RecordingListTableViewController ()
+@property (strong, nonatomic) NSIndexPath *indexPathToBeDeleted;
 
 
 @end
@@ -27,9 +28,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 
-    self.tableView.backgroundColor = self.recordingColor;
+//    self.tableView.backgroundColor = self.recordingColor;
     
     self.recordingList = [NSMutableArray new];
     
@@ -60,7 +60,7 @@
     
     SNTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"RecordingDetailView" forIndexPath:indexPath];
     
-    cell.backgroundColor = self.recordingColor;
+//    cell.backgroundColor = self.recordingColor;
     
     cell.labelName = self.recordingList[indexPath.row];
     
@@ -82,7 +82,7 @@
         newRecordingDetailViewController.recordingFilePath = [NSString stringWithFormat:@"%@/%@", self.currentAlbumFolderPath, self.recordingList[selectedIndexPath.row]];
         newRecordingDetailViewController.stampsFilePath = [newRecordingDetailViewController.recordingFilePath
                                                            stringByReplacingOccurrencesOfString:@".m4a" withString:@".txt"];
-        newRecordingDetailViewController.timeStampColor = self.recordingColor;
+//        newRecordingDetailViewController.timeStampColor = self.recordingColor;
         
         NSLog(@"We have %@ and %@",newRecordingDetailViewController.recordingFilePath, newRecordingDetailViewController.stampsFilePath);
     }
@@ -145,8 +145,20 @@
     {
         if (![self.albumName.text isEqualToString: self.albumNameString])
         {
+            NSString * tempErrorMessage = [NSString new];
+            
+            if ([self.albumName.text isEqualToString:@""])
+            {
+                tempErrorMessage = [NSString stringWithFormat:@"Can't have an empty name"];
+            }
+            
+            else
+            {
+                tempErrorMessage = [NSString stringWithFormat:@"File named %@ exists", self.albumName.text];
+            }
+            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Warning"
-                                                            message: [NSString stringWithFormat:@"File named %@ exists", self.albumName.text]
+                                                            message: tempErrorMessage
                                                            delegate: nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
@@ -213,14 +225,41 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/%@", self.currentAlbumFolderPath, self.recordingList[indexPath.row]] error:nil];
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        self.indexPathToBeDeleted = indexPath;
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
+                                                        message:@"Are you sure?"
+                                                       delegate:self
+                                              cancelButtonTitle:@"NO"
+                                              otherButtonTitles:@"YES", nil];
+        [alert show];
+        
+    }
     
-    [self.recordingList removeObjectAtIndex:indexPath.row];
-    
-    [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+
     
 }
 
-
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:@"NO"])
+    {
+        NSLog(@"Nothing to do here");
+    }
+    else if([title isEqualToString:@"YES"])
+    {
+        NSLog(@"Delete the Track");
+        
+        [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@/%@", self.currentAlbumFolderPath, self.recordingList[self.indexPathToBeDeleted.row]] error:nil];
+        
+        [self.recordingList removeObjectAtIndex:self.indexPathToBeDeleted.row];
+        
+        [self.tableView deleteRowsAtIndexPaths:@[self.indexPathToBeDeleted] withRowAnimation:UITableViewRowAnimationAutomatic];    }
+    
+    
+}
 
 @end

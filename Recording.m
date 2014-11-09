@@ -15,4 +15,5 @@
 @dynamic nameLable;
 @dynamic date;
 @dynamic folderDirectory;
+
 @end

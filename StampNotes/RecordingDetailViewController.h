@@ -16,5 +16,13 @@
 @property (strong, nonatomic) NSMutableArray *timeStamps;
 @property (strong, nonatomic) UIColor *timeStampColor;
 
+@property (weak, nonatomic) IBOutlet UILabel *timeElapsed;
+@property (weak, nonatomic) IBOutlet UILabel *timeDuration;
+@property (weak, nonatomic) IBOutlet UISlider *curretTimeSlider;
+
+@property BOOL isPaused;
+@property BOOL scrubbing;
+
+@property NSTimer *timer;
 
 @end
