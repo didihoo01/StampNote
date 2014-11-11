@@ -51,6 +51,8 @@
     self.previousTime = 0.0;
     
 //    self.finishedRecordingButton.enabled = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
+
 
     self.navigationItem.hidesBackButton = YES;
 
@@ -128,6 +130,7 @@
 {
     
     self.navigationController.navigationBarHidden = NO;
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
     
     if (self.recorder.recording)
@@ -330,5 +333,7 @@
         
         [self.navigationController popViewControllerAnimated:YES];    }
 }
+
+
 
 @end

@@ -96,7 +96,7 @@
 //    [self.myTableCell.cellTextField  setDelegate:self];
     
     
-    self.myTableCell.textLabel.font = [UIFont systemFontOfSize:15];
+//    self.myTableCell.textLabel.font = [UIFont systemFontOfSize:15];
     
 //    self.myTableCell.backgroundColor = [self colorForCellAtIndexPath:indexPath];
 
@@ -108,11 +108,13 @@
     
     NSString *tempMDYString = [dateFormatter stringFromDate:[self.recordings[indexPath.row] date]];
     
+    [self.myTableCell setDateLabelName:tempMDYString];
+    
     [dateFormatter setDateFormat:@"hh:mma"];
 
     NSString *tempHMString = [dateFormatter stringFromDate:[self.recordings[indexPath.row] date]];
     
-    [self.myTableCell setTimeLabelName:[NSString stringWithFormat:@"%@ at %@", tempMDYString, tempHMString]];
+    [self.myTableCell setTimeLabelName:tempHMString];
     
     NSArray *directoryContent  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self.recordings[indexPath.row] folderDirectory] error:nil];
 
@@ -213,7 +215,7 @@
     
     newRecording.name = [NSString stringWithFormat:@"Session_%@", [dateFormatter stringFromDate:newRecording.date]];
 
-    newRecording.nameLable = @"Untitled Folder";
+    newRecording.nameLable = @"Untitled";
 
     
     

@@ -16,6 +16,10 @@
 		1794616919E70D68009515F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1794616819E70D68009515F5 /* Foundation.framework */; };
 		1796C22D19F46C9600CD6006 /* SNTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1796C22C19F46C9600CD6006 /* SNTableViewCell.m */; };
 		17ACE49E19EB6469001EE564 /* RecordingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 17ACE49D19EB6469001EE564 /* RecordingDetailViewController.m */; };
+		17B9FF791A1030600062048C /* Folder-New-01-48.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B9FF781A1030600062048C /* Folder-New-01-48.png */; };
+		17B9FF7B1A10338B0062048C /* Folder-48 (1).png in Resources */ = {isa = PBXBuildFile; fileRef = 17B9FF7A1A10338B0062048C /* Folder-48 (1).png */; };
+		17B9FF7D1A11894A0062048C /* Voice-Search-48 (3).png in Resources */ = {isa = PBXBuildFile; fileRef = 17B9FF7C1A11894A0062048C /* Voice-Search-48 (3).png */; };
+		17B9FF7F1A118BE80062048C /* Rubber-Stamp-128 (3).png in Resources */ = {isa = PBXBuildFile; fileRef = 17B9FF7E1A118BE80062048C /* Rubber-Stamp-128 (3).png */; };
 		17C5F4E519E0B01000559E97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E419E0B01000559E97 /* main.m */; };
 		17C5F4E819E0B01000559E97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E719E0B01000559E97 /* AppDelegate.m */; };
 		17C5F4EB19E0B01000559E97 /* StampNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E919E0B01000559E97 /* StampNotes.xcdatamodeld */; };
@@ -57,6 +61,10 @@
 		1796C22C19F46C9600CD6006 /* SNTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SNTableViewCell.m; sourceTree = "<group>"; };
 		17ACE49C19EB6469001EE564 /* RecordingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordingDetailViewController.h; sourceTree = "<group>"; };
 		17ACE49D19EB6469001EE564 /* RecordingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordingDetailViewController.m; sourceTree = "<group>"; };
+		17B9FF781A1030600062048C /* Folder-New-01-48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Folder-New-01-48.png"; sourceTree = "<group>"; };
+		17B9FF7A1A10338B0062048C /* Folder-48 (1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Folder-48 (1).png"; sourceTree = "<group>"; };
+		17B9FF7C1A11894A0062048C /* Voice-Search-48 (3).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Voice-Search-48 (3).png"; sourceTree = "<group>"; };
+		17B9FF7E1A118BE80062048C /* Rubber-Stamp-128 (3).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rubber-Stamp-128 (3).png"; sourceTree = "<group>"; };
 		17C5F4DF19E0B01000559E97 /* StampNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StampNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17C5F4E319E0B01000559E97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17C5F4E419E0B01000559E97 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -104,6 +112,10 @@
 		17C5F4D619E0B01000559E97 = {
 			isa = PBXGroup;
 			children = (
+				17B9FF7E1A118BE80062048C /* Rubber-Stamp-128 (3).png */,
+				17B9FF7C1A11894A0062048C /* Voice-Search-48 (3).png */,
+				17B9FF7A1A10338B0062048C /* Folder-48 (1).png */,
+				17B9FF781A1030600062048C /* Folder-New-01-48.png */,
 				1773765C1A0F6B6B00592C85 /* Rubber-Stamp-128 (2).png */,
 				177376561A0F56C500592C85 /* Voice-Search-32.png */,
 				17DEE7551A02B53100EC8D41 /* circle_fast_backward.png */,
@@ -271,12 +283,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17B9FF7D1A11894A0062048C /* Voice-Search-48 (3).png in Resources */,
 				17DEE7501A02B48A00EC8D41 /* play-100.png in Resources */,
+				17B9FF7F1A118BE80062048C /* Rubber-Stamp-128 (3).png in Resources */,
+				17B9FF791A1030600062048C /* Folder-New-01-48.png in Resources */,
 				17DEE7561A02B53100EC8D41 /* circle_fast_backward.png in Resources */,
 				17C5F4F119E0B01000559E97 /* Main.storyboard in Resources */,
 				177376571A0F56C500592C85 /* Voice-Search-32.png in Resources */,
 				17DEE7541A02B49B00EC8D41 /* pause-100.png in Resources */,
 				1773765D1A0F6B6B00592C85 /* Rubber-Stamp-128 (2).png in Resources */,
+				17B9FF7B1A10338B0062048C /* Folder-48 (1).png in Resources */,
 				17C5F4F619E0B01000559E97 /* LaunchScreen.xib in Resources */,
 				17DEE7521A02B49300EC8D41 /* circle_fast_forward.png in Resources */,
 				17C5F4F319E0B01000559E97 /* Images.xcassets in Resources */,

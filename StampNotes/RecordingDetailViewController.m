@@ -320,6 +320,8 @@
     [self.player stop];
     [[AVAudioSession sharedInstance] setActive:NO error:nil];
 }
+
+
 /*
 #pragma mark - Navigation
 

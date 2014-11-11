@@ -11,8 +11,9 @@
 @interface SNTableViewCell()
 
 @property (weak, nonatomic) IBOutlet UILabel *label;
-@property (weak, nonatomic) IBOutlet UILabel *timeLable;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end
 
@@ -47,7 +48,16 @@
         _timeLabelName = [timeLabelName copy];
     }
     
-    self.timeLable.text = _timeLabelName;
+    self.timeLabel.text = _timeLabelName;
+}
+
+-(void)setDateLabelName:(NSString *)dateLabelName
+{
+    if (_dateLabelName != dateLabelName)
+    {
+        _dateLabelName = [dateLabelName copy];
+    }
+    self.dateLabel.text = _dateLabelName;
 }
 
 -(void)setItemLabelName:(NSString *)itemLabelName
