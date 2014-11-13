@@ -218,7 +218,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Folders" id="A5w-h2-KW9">
-                        <barButtonItem key="rightBarButtonItem" image="Icon.png" id="frO-0k-F9U">
+                        <barButtonItem key="rightBarButtonItem" title="New" id="frO-0k-F9U">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="sRs-gD-g5D" kind="show" identifier="newRecordingSession" id="kZO-OO-L1E"/>
@@ -345,7 +345,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Recordings" id="A18-tV-pye">
-                        <barButtonItem key="rightBarButtonItem" image="Icon.png" id="uhp-7t-7ZI">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="uhp-7t-7ZI">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="sRs-gD-g5D" kind="show" identifier="AddNewRecordingToCurrentAlbum" id="E97-oP-amH"/>
@@ -474,7 +474,7 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="R8S-1P-JdR">
                                 <rect key="frame" x="86" y="483" width="422" height="31"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.090196078431372548" green="0.51764705882352946" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="rUO-th-BR3"/>
                                 </constraints>
@@ -545,7 +545,6 @@
     </scenes>
     <resources>
         <image name="Folder-New-01-256.png" width="256" height="256"/>
-        <image name="Icon.png" width="32" height="32"/>
         <image name="Media-Play-256.png" width="256" height="256"/>
         <image name="Rubber-Stamp-128 (3).png" width="128" height="128"/>
         <image name="circle_fast_backward.png" width="128" height="128"/>
@@ -553,6 +552,6 @@
         <image name="play-100.png" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="kZO-OO-L1E"/>
+        <segue reference="E97-oP-amH"/>
     </inferredMetricsTieBreakers>
 </document>

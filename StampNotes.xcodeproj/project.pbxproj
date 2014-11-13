@@ -17,9 +17,9 @@
 		17B9FF7F1A118BE80062048C /* Rubber-Stamp-128 (3).png in Resources */ = {isa = PBXBuildFile; fileRef = 17B9FF7E1A118BE80062048C /* Rubber-Stamp-128 (3).png */; };
 		17BEBF4E1A14093A00E9A130 /* Folder-New-01-256.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BEBF4D1A14093A00E9A130 /* Folder-New-01-256.png */; };
 		17BEBF501A14098000E9A130 /* Media-Play-256.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BEBF4F1A14098000E9A130 /* Media-Play-256.png */; };
-		17BEBF541A1423B600E9A130 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BEBF531A1423B600E9A130 /* Icon.png */; };
 		17BEBF561A14249000E9A130 /* circle_fast_backward.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BEBF551A14249000E9A130 /* circle_fast_backward.png */; };
 		17BEBF581A143BCD00E9A130 /* MicroPhoneIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BEBF571A143BCD00E9A130 /* MicroPhoneIcon.png */; };
+		17BEBF5A1A147CF700E9A130 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 17BEBF591A147CF700E9A130 /* Icon.png */; };
 		17C5F4E519E0B01000559E97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E419E0B01000559E97 /* main.m */; };
 		17C5F4E819E0B01000559E97 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E719E0B01000559E97 /* AppDelegate.m */; };
 		17C5F4EB19E0B01000559E97 /* StampNotes.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 17C5F4E919E0B01000559E97 /* StampNotes.xcdatamodeld */; };
@@ -61,9 +61,9 @@
 		17B9FF7E1A118BE80062048C /* Rubber-Stamp-128 (3).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rubber-Stamp-128 (3).png"; sourceTree = "<group>"; };
 		17BEBF4D1A14093A00E9A130 /* Folder-New-01-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Folder-New-01-256.png"; sourceTree = "<group>"; };
 		17BEBF4F1A14098000E9A130 /* Media-Play-256.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Media-Play-256.png"; sourceTree = "<group>"; };
-		17BEBF531A1423B600E9A130 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		17BEBF551A14249000E9A130 /* circle_fast_backward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = circle_fast_backward.png; sourceTree = "<group>"; };
 		17BEBF571A143BCD00E9A130 /* MicroPhoneIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MicroPhoneIcon.png; sourceTree = "<group>"; };
+		17BEBF591A147CF700E9A130 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		17C5F4DF19E0B01000559E97 /* StampNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StampNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		17C5F4E319E0B01000559E97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		17C5F4E419E0B01000559E97 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -110,9 +110,9 @@
 		17C5F4D619E0B01000559E97 = {
 			isa = PBXGroup;
 			children = (
+				17BEBF591A147CF700E9A130 /* Icon.png */,
 				17BEBF571A143BCD00E9A130 /* MicroPhoneIcon.png */,
 				17BEBF551A14249000E9A130 /* circle_fast_backward.png */,
-				17BEBF531A1423B600E9A130 /* Icon.png */,
 				17BEBF4F1A14098000E9A130 /* Media-Play-256.png */,
 				17BEBF4D1A14093A00E9A130 /* Folder-New-01-256.png */,
 				17B9FF7E1A118BE80062048C /* Rubber-Stamp-128 (3).png */,
@@ -280,6 +280,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				17BEBF5A1A147CF700E9A130 /* Icon.png in Resources */,
 				17DEE7501A02B48A00EC8D41 /* play-100.png in Resources */,
 				17BEBF501A14098000E9A130 /* Media-Play-256.png in Resources */,
 				17B9FF7F1A118BE80062048C /* Rubber-Stamp-128 (3).png in Resources */,
@@ -288,7 +289,6 @@
 				17C5F4F119E0B01000559E97 /* Main.storyboard in Resources */,
 				17DEE7541A02B49B00EC8D41 /* pause-100.png in Resources */,
 				17C5F4F619E0B01000559E97 /* LaunchScreen.xib in Resources */,
-				17BEBF541A1423B600E9A130 /* Icon.png in Resources */,
 				17DEE7521A02B49300EC8D41 /* circle_fast_forward.png in Resources */,
 				17BEBF581A143BCD00E9A130 /* MicroPhoneIcon.png in Resources */,
 				17C5F4F319E0B01000559E97 /* Images.xcassets in Resources */,

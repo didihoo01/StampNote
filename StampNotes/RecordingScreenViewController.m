@@ -218,8 +218,8 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Done Recording?"
                                                     message:@""
                                                    delegate:self
-                                          cancelButtonTitle:@"NO"
-                                          otherButtonTitles:@"YES", nil];
+                                          cancelButtonTitle:@"No"
+                                          otherButtonTitles:@"Yes", nil];
     [alert show];
     
     
@@ -311,11 +311,11 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if([title isEqualToString:@"NO"])
+    if([title isEqualToString:@"No"])
     {
         NSLog(@"Nothing to do here");
     }
-    else if([title isEqualToString:@"YES"])
+    else if([title isEqualToString:@"Yes"])
     {
         [self.recorder stop];
         [self killTimer];

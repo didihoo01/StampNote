@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSIndexPath *indexPathToBeDeleted;
 @property (strong, nonatomic) NSDateFormatter *tableCellDateFormatter;
 @property (strong, nonatomic) AVAudioPlayer *player;
+@property (strong, nonatomic) NSString * albumNameBeforeChange;
 
 @end
 
@@ -53,6 +54,8 @@
     [self.tableView reloadData];
     
     self.albumName.text = self.albumTextFieldLable;
+    
+    self.albumNameBeforeChange = self.albumName.text;
 
 }
 
@@ -194,6 +197,8 @@
                                                            delegate: nil
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
+            
+            self.albumName.text = self.albumNameBeforeChange;
             [alert show];
 
         }
@@ -218,9 +223,8 @@
         {
             if ([[albumList[i] name] isEqualToString:self.albumNameString])
             {
-                NSString * filePath = [NSString stringWithFormat:@"%@/%@", self.currentAlbumFolderPath, [albumList[i] name]];
                 
-                [[NSFileManager defaultManager] moveItemAtPath:filePath
+                [[NSFileManager defaultManager] moveItemAtPath:self.currentAlbumFolderPath
                                                         toPath: [NSString stringWithFormat:@"%@/%@", [paths objectAtIndex:0], self.albumName.text]
                                                          error:nil];
 
