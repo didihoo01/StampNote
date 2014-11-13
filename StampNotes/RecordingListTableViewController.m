@@ -218,8 +218,9 @@
         {
             if ([[albumList[i] name] isEqualToString:self.albumNameString])
             {
+                NSString * filePath = [NSString stringWithFormat:@"%@/%@", self.currentAlbumFolderPath, [albumList[i] name]];
                 
-                [[NSFileManager defaultManager] moveItemAtPath:[albumList[i] folderDirectory]
+                [[NSFileManager defaultManager] moveItemAtPath:filePath
                                                         toPath: [NSString stringWithFormat:@"%@/%@", [paths objectAtIndex:0], self.albumName.text]
                                                          error:nil];
 
@@ -239,7 +240,7 @@
                 
                 NSString * path = [[paths objectAtIndex:0] stringByAppendingPathComponent:newAlbum.name];
                 
-                newAlbum.folderDirectory = path;
+//                newAlbum.folderDirectory = path;
                 self.currentAlbumFolderPath = path;
                 
                 [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
@@ -264,8 +265,8 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
                                                         message:@"Are you sure?"
                                                        delegate:self
-                                              cancelButtonTitle:@"NO"
-                                              otherButtonTitles:@"YES", nil];
+                                              cancelButtonTitle:@"No"
+                                              otherButtonTitles:@"Yes", nil];
         [alert show];
         
     }
@@ -277,11 +278,11 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if([title isEqualToString:@"NO"])
+    if([title isEqualToString:@"No"])
     {
         NSLog(@"Nothing to do here");
     }
-    else if([title isEqualToString:@"YES"])
+    else if([title isEqualToString:@"Yes"])
     {
         NSLog(@"Delete the Track");
         

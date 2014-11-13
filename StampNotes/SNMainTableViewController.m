@@ -18,6 +18,8 @@
 @property (strong, nonatomic) NSIndexPath *indexPathToBeDeleted;
 @property (strong, nonatomic) NSDateFormatter *mainTableViewCellDateFormatter;
 
+//testing variable in attempt to fix a major bug of not reading files after recompile
+@property (strong, nonatomic) NSString *currentAppDocumentPath;
 
 
 @end
@@ -55,6 +57,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    
+    self.currentAppDocumentPath = [paths objectAtIndex:0];
+    
     self.mainTableViewCellDateFormatter = [[NSDateFormatter alloc] init];
 
     [super viewWillAppear:animated];
@@ -62,26 +68,6 @@
 //    self.tableView
     [self.tableView reloadData];
 
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    NSError *error;
-    NSArray * allFolders = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[paths objectAtIndex:0] error:&error];
-    
-    NSArray *filteredNoteFolders = [allFolders filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self BEGINSWITH 'Session'"]];
-    
-    
-    for (int i = 0; i < [filteredNoteFolders count]; i++)
-    {
-        for (int ii = 0;  ii < [self.recordings count]; ii++)
-        {
-            //if a file in the document folder is not equal to any of the folders in coredata, it means the user just imported a new note folder via itunes, it could happen when a user restores their note or shares their note with others
-            if (![[self.recordings[ii] name] isEqualToString:filteredNoteFolders[i]])
-            {
-                ;
-            }
-        }
-    }
-    
 }
 
 
@@ -119,7 +105,10 @@
     
     [self.myTableCell setTimeLabelName:tempHMString];
     
-    NSArray *directoryContent  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:[self.recordings[indexPath.row] folderDirectory] error:nil];
+    NSString *filePath = [NSString stringWithFormat:@"%@/%@", self.currentAppDocumentPath, [self.recordings[indexPath.row] name]];
+    
+    
+    NSArray *directoryContent  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:filePath error:nil];
 
     [self.myTableCell setItemLabelName:[NSString stringWithFormat:@"%d", (int)[directoryContent count] / 2]];
 
@@ -171,7 +160,10 @@
     {
         RecordingListTableViewController *newRecordingListTableViewController = [segue destinationViewController];
         NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
-        newRecordingListTableViewController.currentAlbumFolderPath = [self.recordings[selectedIndexPath.row] folderDirectory];
+        
+        
+        newRecordingListTableViewController.currentAlbumFolderPath =  [NSString stringWithFormat:@"%@/%@", self.currentAppDocumentPath ,[self.recordings[selectedIndexPath.row] name]];
+        
         newRecordingListTableViewController.albumNameString = [self.recordings[selectedIndexPath.row] name];
         newRecordingListTableViewController.albumTextFieldLable = [self.recordings[selectedIndexPath.row] nameLable];
         newRecordingListTableViewController.updatedAlbumList = self.recordings;
@@ -192,8 +184,8 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Warning"
                                                     message:@"Are you sure?"
                                                    delegate:self
-                                          cancelButtonTitle:@"NO"
-                                          otherButtonTitles:@"YES", nil];
+                                          cancelButtonTitle:@"No"
+                                          otherButtonTitles:@"Yes", nil];
     [alert show];
     
     }
@@ -220,10 +212,7 @@
 
     newRecording.nameLable = @"Untitled";
     
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    
-    NSString * path = [[paths objectAtIndex:0] stringByAppendingPathComponent:newRecording.name];
+    NSString * path = [self.currentAppDocumentPath stringByAppendingPathComponent:newRecording.name];
     
     if (![[NSFileManager defaultManager] fileExistsAtPath:path])
     {
@@ -233,32 +222,34 @@
                                                         error:nil];
     }
     
-    newRecording.folderDirectory = path;
+//    newRecording.folderDirectory = path;
     [(AppDelegate *)[UIApplication sharedApplication].delegate saveContext];
     
     [self.recordings addObject:newRecording];
 
     
-    NSLog(@"Creating %@", newRecording.folderDirectory);
+//    NSLog(@"Creating %@", newRecording.folderDirectory);
     
-    return newRecording.folderDirectory;
+    return path;
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    if([title isEqualToString:@"NO"])
+    if([title isEqualToString:@"No"])
     {
 //        NSLog(@"Nothing to do here");
     }
-    else if([title isEqualToString:@"YES"])
+    else if([title isEqualToString:@"Yes"])
     {
 //        NSLog(@"Delete the FOLDER");
         
         NSManagedObjectContext *recordingContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
         
         
-        [[NSFileManager defaultManager] removeItemAtPath:[self.recordings[self.indexPathToBeDeleted.row] folderDirectory] error:nil];
+        NSString *filePathAboutToBeDeleted = [NSString stringWithFormat:@"%@/%@", self.currentAppDocumentPath, [self.recordings[self.indexPathToBeDeleted.row] name]];
+        
+        [[NSFileManager defaultManager] removeItemAtPath:filePathAboutToBeDeleted error:nil];
         
 //        NSLog(@"Deleting %@", [self.recordings[self.indexPathToBeDeleted.row] folderDirectory]);
         
