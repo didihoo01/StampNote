@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fileSizeLabel;
 
 @end
 
@@ -40,6 +41,7 @@
     
     self.label.text = _labelName;
 }
+
 
 -(void)setTimeLabelName:(NSString *)timeLabelName
 {
@@ -68,6 +70,16 @@
     }
     self.itemLabel.text = _itemLabelName;
 
+}
+
+-(void)setFileSizeLabelName:(NSString *)fileSizeLabelName
+{
+    if (_fileSizeLabelName != fileSizeLabelName)
+    {
+        _fileSizeLabelName = [fileSizeLabelName copy];
+    }
+    self.fileSizeLabel.text = _fileSizeLabelName;
+    
 }
 
 

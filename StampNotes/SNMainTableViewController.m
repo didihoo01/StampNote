@@ -16,6 +16,7 @@
 @interface SNMainTableViewController ()
 @property(nonatomic, strong) SNTableViewCell *myTableCell;
 @property (strong, nonatomic) NSIndexPath *indexPathToBeDeleted;
+@property (strong, nonatomic) NSDateFormatter *mainTableViewCellDateFormatter;
 
 
 
@@ -23,7 +24,8 @@
 
 @implementation SNMainTableViewController
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
     
     if(self = [super initWithCoder:aDecoder])
     {
@@ -43,7 +45,6 @@
         NSArray *recordingList = [recordingContext executeFetchRequest:recordingsFetchRequest error: &error];
         
         self.recordings = [recordingList mutableCopy];
-        
 //        NSLog(@"%@", self.recordings);
     }
     return self;
@@ -51,7 +52,11 @@
 
 
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    self.mainTableViewCellDateFormatter = [[NSDateFormatter alloc] init];
+
     [super viewWillAppear:animated];
     
 //    self.tableView
@@ -102,17 +107,15 @@
 
     [self.myTableCell setLabelName:[self.recordings[indexPath.row] nameLable]];
     
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-
-    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+    [self.mainTableViewCellDateFormatter setDateFormat:@"MM/dd/yyyy"];
     
-    NSString *tempMDYString = [dateFormatter stringFromDate:[self.recordings[indexPath.row] date]];
+    NSString *tempMDYString = [self.mainTableViewCellDateFormatter stringFromDate:[self.recordings[indexPath.row] date]];
     
     [self.myTableCell setDateLabelName:tempMDYString];
     
-    [dateFormatter setDateFormat:@"hh:mma"];
+    [self.mainTableViewCellDateFormatter setDateFormat:@"hh:mm a"];
 
-    NSString *tempHMString = [dateFormatter stringFromDate:[self.recordings[indexPath.row] date]];
+    NSString *tempHMString = [self.mainTableViewCellDateFormatter stringFromDate:[self.recordings[indexPath.row] date]];
     
     [self.myTableCell setTimeLabelName:tempHMString];
     
@@ -216,7 +219,6 @@
     newRecording.name = [NSString stringWithFormat:@"Session_%@", [dateFormatter stringFromDate:newRecording.date]];
 
     newRecording.nameLable = @"Untitled";
-
     
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -247,18 +249,18 @@
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if([title isEqualToString:@"NO"])
     {
-        NSLog(@"Nothing to do here");
+//        NSLog(@"Nothing to do here");
     }
     else if([title isEqualToString:@"YES"])
     {
-        NSLog(@"Delete the FOLDER");
+//        NSLog(@"Delete the FOLDER");
         
         NSManagedObjectContext *recordingContext = ((AppDelegate *)[UIApplication sharedApplication].delegate).managedObjectContext;
         
         
         [[NSFileManager defaultManager] removeItemAtPath:[self.recordings[self.indexPathToBeDeleted.row] folderDirectory] error:nil];
         
-        NSLog(@"Deleting %@", [self.recordings[self.indexPathToBeDeleted.row] folderDirectory]);
+//        NSLog(@"Deleting %@", [self.recordings[self.indexPathToBeDeleted.row] folderDirectory]);
         
         [recordingContext deleteObject: self.recordings[self.indexPathToBeDeleted.row]];
         
@@ -270,5 +272,25 @@
     }
 }
 
+
+//-(void)upDateAppDocumentPath: (NSArray *)recordings
+//{
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *currentDocumentPath = [paths objectAtIndex:0];
+//    
+//    self.recordings = [recordings mutableCopy];
+//    
+//    NSString * path = [currentDocumentPath stringByAppendingPathComponent:[self.recordings[0] name]];
+//
+//    
+//    if (![[self.recordings[0] folderDirectory] isEqualToString:path])
+//    {
+//        for (int i = 0; i < [self.recordings count]; i++)
+//        {
+//            [self.recordings[i].folderDirectory = [currentDocumentPath stringByAppendingPathComponent:[self.recordings[i] name]]
+//        }
+//    }
+//    
+//}
 
 @end

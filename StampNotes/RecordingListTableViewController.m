@@ -11,10 +11,13 @@
 #import "AppDelegate.h"
 #import "RecordingDetailViewController.h"
 #import "SNTableViewCell.h"
+#import <AVFoundation/AVFoundation.h>
+
 
 @interface RecordingListTableViewController ()
 @property (strong, nonatomic) NSIndexPath *indexPathToBeDeleted;
-
+@property (strong, nonatomic) NSDateFormatter *tableCellDateFormatter;
+@property (strong, nonatomic) AVAudioPlayer *player;
 
 @end
 
@@ -28,6 +31,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    self.tableCellDateFormatter = [[NSDateFormatter alloc] init];
+
 
 //    self.tableView.backgroundColor = self.recordingColor;
     
@@ -62,7 +68,33 @@
     
 //    cell.backgroundColor = self.recordingColor;
     
-    cell.labelName = self.recordingList[indexPath.row];
+//    cell.labelName = self.recordingList[indexPath.row];
+    
+    NSString *recordingPath = [NSString stringWithFormat:@"%@/%@", self.currentAlbumFolderPath, self.recordingList[indexPath.row]];
+    
+    NSURL *recordingURL = [NSURL fileURLWithPath:recordingPath];
+    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:recordingURL error:nil];
+    
+    cell.labelName = [self timeFormatted:[self.player duration]];
+    
+    
+    
+    NSDictionary *recordingAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:recordingPath error:nil];
+    
+    NSDate *date = (NSDate*)[recordingAttributes objectForKey: NSFileCreationDate];
+    
+    cell.fileSizeLabelName = [NSString stringWithFormat:@"%.02f",([[recordingAttributes objectForKey:NSFileSize] floatValue] / (1000000))];
+    
+    NSLog(@"%@", cell.fileSizeLabelName);
+        
+    [self.tableCellDateFormatter setDateFormat:@"MM/dd/yyyy"];
+    
+    cell.dateLabelName = [self.tableCellDateFormatter stringFromDate:date];
+    
+    [self.tableCellDateFormatter setDateFormat:@"hh:mm a"];
+
+    cell.timeLabelName = [self.tableCellDateFormatter stringFromDate:date];
+    
     
     return cell;
 }
@@ -258,8 +290,18 @@
         [self.recordingList removeObjectAtIndex:self.indexPathToBeDeleted.row];
         
         [self.tableView deleteRowsAtIndexPaths:@[self.indexPathToBeDeleted] withRowAnimation:UITableViewRowAnimationAutomatic];    }
+}
+
+- (NSString *)timeFormatted:(float)totalSecondsInFloatingPoint
+{
     
+    int totalSeconds = floor(lroundf(totalSecondsInFloatingPoint));
     
+    int seconds = totalSeconds % 60;
+    int minutes = (totalSeconds / 60) % 60;
+    int hours = totalSeconds / 3600;
+    
+    return [NSString stringWithFormat:@"%02d:%02d:%02d",hours, minutes, seconds];
 }
 
 @end

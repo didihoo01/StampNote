@@ -15,6 +15,7 @@
 @property (nonatomic, copy) NSString* timeLabelName;
 @property (nonatomic, copy) NSString* itemLabelName;
 @property (nonatomic, copy) NSString* dateLabelName;
+@property (nonatomic, copy) NSString* fileSizeLabelName;
 
 
 
