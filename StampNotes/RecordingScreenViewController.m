@@ -95,7 +95,9 @@
     
     
     
-    [self.startRecordingButton setTitle:@"Pause" forState:UIControlStateNormal];
+//    [self.startRecordingButton setTitle:@"Pause" forState:UIControlStateNormal];
+    UIImage *pauseImage = [UIImage imageNamed:@"pause-100.png"];
+    [self.startRecordingButton setImage:pauseImage forState:UIControlStateNormal];
 
     
     CADisplayLink *displaylink = [CADisplayLink displayLinkWithTarget:self selector:@selector(updateMeters)];
@@ -193,7 +195,10 @@
         
     
         
-        [self.startRecordingButton setTitle:@"Pause" forState:UIControlStateNormal];
+//        [self.startRecordingButton setTitle:@"Pause" forState:UIControlStateNormal];
+        
+        UIImage *pauseImage = [UIImage imageNamed:@"pause-100.png"];
+        [self.startRecordingButton setImage:pauseImage forState:UIControlStateNormal];
         
     }
     
@@ -206,6 +211,9 @@
         [self killTimer];
         
         [self.startRecordingButton setTitle:@"Resume" forState:UIControlStateNormal];
+        
+        UIImage *recordImage = [UIImage imageNamed:@"Voice-Search-256.png"];
+        [self.startRecordingButton setImage:recordImage forState:UIControlStateNormal];
     }
     
     

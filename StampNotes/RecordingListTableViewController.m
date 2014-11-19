@@ -47,7 +47,11 @@
     
     NSArray *allContents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:self.currentAlbumFolderPath error:&error];
     
+    
+    NSLog(@"%@", allContents);
+    
     self.recordingList = [[allContents filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"self ENDSWITH '.m4a'"]] mutableCopy];
+    
     
     [self.albumName setDelegate:self];
             
@@ -74,6 +78,8 @@
 //    cell.labelName = self.recordingList[indexPath.row];
     
     NSString *recordingPath = [NSString stringWithFormat:@"%@/%@", self.currentAlbumFolderPath, self.recordingList[indexPath.row]];
+    
+    NSLog(@"%@", recordingPath);
     
     NSURL *recordingURL = [NSURL fileURLWithPath:recordingPath];
     self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:recordingURL error:nil];
@@ -167,8 +173,18 @@
 {
     [self.albumName resignFirstResponder];
     [self checkFilesWithSameName];
+
     return YES;
 }
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+
+}
+
+
+
+
 
 -(void)checkFilesWithSameName
 {
@@ -252,6 +268,13 @@
                 [self.updatedAlbumList removeAllObjects];
                 
                 [self.updatedAlbumList addObjectsFromArray:[recordingContext executeFetchRequest:recordingsFetchRequest error: &error]];
+                
+                self.albumNameBeforeChange = newAlbum.name;
+                
+                self.albumNameString = newAlbum.name;
+                
+                self.albumTextFieldLable = newAlbum.name;
+                
                 break;
             }
         }
@@ -308,5 +331,7 @@
     
     return [NSString stringWithFormat:@"%02d:%02d:%02d",hours, minutes, seconds];
 }
+
+
 
 @end

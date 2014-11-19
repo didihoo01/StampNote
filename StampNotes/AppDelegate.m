@@ -23,13 +23,8 @@
 
     
     [[UINavigationBar appearance] setBarTintColor:UIColorFromRGB(0x08ACFF)];
-    NSShadow *shadow = [[NSShadow alloc] init];
-    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
-    shadow.shadowOffset = CGSizeMake(0, 1);
-    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor whiteColor], NSForegroundColorAttributeName,
-                                                           shadow, NSShadowAttributeName,
-                                                           [UIFont fontWithName:@"Default" size:24.0], NSFontAttributeName, nil]];
+    [[UINavigationBar appearance]
+     setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
 
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 //    [[UINavigationBar appearance] setTextTintColor:[UIColor whiteColor]];

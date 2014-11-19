@@ -105,12 +105,11 @@
     
     [self.myTableCell setTimeLabelName:tempHMString];
     
-    NSString *filePath = [NSString stringWithFormat:@"%@/%@", self.currentAppDocumentPath, [self.recordings[indexPath.row] name]];
+//    NSString *filePath = [NSString stringWithFormat:@"%@/%@", self.currentAppDocumentPath, [self.recordings[indexPath.row] name]];
     
-    
-    NSArray *directoryContent  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:filePath error:nil];
+//    NSArray *directoryContent  = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:filePath error:nil];
 
-    [self.myTableCell setItemLabelName:[NSString stringWithFormat:@"%d", (int)[directoryContent count] / 2]];
+//    [self.myTableCell setItemLabelName:[NSString stringWithFormat:@"%d", (int)[directoryContent count] / 2]];
 
 
     return self.myTableCell;
